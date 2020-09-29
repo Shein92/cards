@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './Button.module.css';
 
 type ButtonPropsType = {
 	text: string,
@@ -12,7 +13,7 @@ const Button = (props: ButtonPropsType) => {
 	}
 
 	return (
-		<button onClick={onClick}>{props.text}</button>
+		<button onClick={onClick} className={style.btn}>{props.text}</button>
 	)
 }
 

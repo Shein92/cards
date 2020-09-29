@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import style from './Input.module.css';
 
 type InputPropsType = {
 	value: string,
@@ -11,7 +12,7 @@ const Input = (props: InputPropsType) => {
 	}
 
 	return (
-		<input value={props.value}
+		<input className={style.inputStyle} value={props.value}
 			onChange={onChange}
 		></input>
 	)

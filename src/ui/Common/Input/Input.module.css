@@ -1,0 +1,9 @@
+.inputStyle {
+    outline: none;
+    border: 2px solid #4CAF50;
+    border-radius: 15px;
+    height: 25px;
+    width: 200px;
+    text-align: center;
+    margin-bottom: 10px;
+}
