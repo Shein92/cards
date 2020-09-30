@@ -7,7 +7,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProfileContainer from '../Profile/ProfileContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import RestorePassContainer from '../RestorePass/RestorePassContainer';
-import { login, newPass, pageNotFound, profile, registration, restorePass } from '../Routes/routes';
+import { login, newPass, profile, registration, restorePass } from '../Routes/routes';
 
 const Main = () => {
 	return (
@@ -19,7 +19,7 @@ const Main = () => {
 				<Route path={restorePass} render={() => <RestorePassContainer />} />
 				<Route path={profile} render={() => <ProfileContainer />} />
 				<Route path={registration} render={() => <RegistrationContainer />} />
-				<Route path={pageNotFound} render={() => <PageNotFound/>}/>
+				<Route render={() => <PageNotFound/>}/>
 			</Switch>
 		</div>
 	)
