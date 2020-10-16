@@ -21,6 +21,7 @@ const Main = () => {
 				<Route path={registration} render={() => <RegistrationContainer />} />
 				<Route render={() => <PageNotFound/>}/>
 			</Switch>
+			1
 		</div>
 	)
 }
