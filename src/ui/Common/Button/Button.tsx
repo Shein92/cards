@@ -3,7 +3,8 @@ import style from './Button.module.css';
 
 type ButtonPropsType = {
 	text: string,
-	onClick: () => void
+	onClick: () => void,
+	type?: 'submit'
 };
 
 const Button = (props: ButtonPropsType) => {
@@ -13,7 +14,7 @@ const Button = (props: ButtonPropsType) => {
 	}
 
 	return (
-		<button onClick={onClick} className={style.btn}>{props.text}</button>
+		<button type={props.type} onClick={onClick} className={style.btn}>{props.text}</button>
 	)
 }
 

@@ -3,7 +3,8 @@ import { registrationReducer } from './registration-reducer';
 import { profileReducer } from './profile-reducer';
 import { newPasswordReducer } from './newPass-reducer';
 import { loginReducer } from './login-reducer';
-import { combineReducers, createStore } from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunkMiddleware from 'redux-thunk'
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,6 @@ const rootReducer = combineReducers({
     restorePassword: restorePasswordReducer
 })
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
