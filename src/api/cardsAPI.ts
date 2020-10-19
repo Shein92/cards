@@ -16,7 +16,10 @@ export const authAPI = {
         return instatce.post('/auth/login', data)
     },
 
-   authMe() {
+    authMe() {
         return instatce.post('/auth/me', {})
-   }
+    },
+    logout() {
+        return instatce.delete('/auth/me', {})
+    }
 }

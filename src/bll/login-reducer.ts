@@ -37,6 +37,16 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
         })
 }
 
+export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+    authAPI.logout()
+        .then(res => {
+            dispatch(setIsLoggedAC(false))
+        })
+        .catch(e => {
+            dispatch(setErrorLoginAC(e.message))
+        })
+}
+
 
 // Types
 

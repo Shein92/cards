@@ -8,13 +8,14 @@ import { Redirect } from 'react-router-dom';
 type ProfilePropsType = any
 
 const Profile = (props: ProfilePropsType) => {
+    const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const userInfo = useSelector<AppRootStateType, ProfileStateType>(state => state.profile)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(authMeTC())
     }, [])
 
-    if (userInfo._id === '') {
+    if (!isLogged) {
         return <Redirect to={'/login'}/>
     }
 
