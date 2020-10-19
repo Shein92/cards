@@ -10,8 +10,9 @@ import { Redirect } from 'react-router-dom';
 
 type LoginPropType = any
 
-const Login = (props: LoginPropType) => {
+const Login = React.memo((props: LoginPropType) => {
 	const isLogged = useSelector<AppRootStateType, boolean>(state => state.login.isLogged)
+	const isError = useSelector<AppRootStateType, string>(state => state.login.error)
 	const dispatch = useDispatch()
 
 	const formik = useFormik({
@@ -64,8 +65,12 @@ const Login = (props: LoginPropType) => {
 			<div>
 				{/*<Button text={'we have cookies!:)'} onClick={() => alert('You have chosen wisely')} />*/}
 			</div>
+			<div>
+				{ isError && <div> ${isError} </div>}
+			</div>
+
 		</div>
 	)
-}
+})
 
 export default Login;
