@@ -4,12 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {authMeTC, ProfileStateType} from "../../bll/profile-reducer";
 import {AppRootStateType} from "../../bll/store";
 import { Redirect } from 'react-router-dom';
+import {Loading} from "../Common/Loading/Loading";
 
 type ProfilePropsType = any
 
 const Profile = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const userInfo = useSelector<AppRootStateType, ProfileStateType>(state => state.profile)
+    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(authMeTC())
@@ -21,6 +23,7 @@ const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={style.profile}>
+            { isLoading && <Loading/> }
             {/*<h2>Profile Page</h2>*/}
             <div>Email: {userInfo.email}</div>
             <div>Name: {userInfo.name}</div>

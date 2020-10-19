@@ -1,6 +1,7 @@
 import {authAPI} from "../api/cardsAPI";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "redux";
+import {setIsLoadingAC} from "./app-reducer";
 
 export type ProfileStateType = {
     _id: string
@@ -15,7 +16,9 @@ export type ProfileStateType = {
     error: string
 }
 
-export type ActionsType = ReturnType<typeof setupProfileAC>;
+export type ActionsType =
+    | ReturnType<typeof setupProfileAC>
+    | ReturnType<typeof setIsLoadingAC>;
 
 const initialState: ProfileStateType = {
     _id: '',
@@ -45,11 +48,14 @@ export const setupProfileAC = (data: ProfileStateType) => {
 
 // Thunks
 export const authMeTC = () => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setIsLoadingAC(true))
     authAPI.authMe()
         .then(res => {
+            dispatch(setIsLoadingAC(false))
             dispatch(setupProfileAC(res.data))
         })
         .catch(err => {
+            dispatch(setIsLoadingAC(false))
         })
 }
 
