@@ -16,7 +16,7 @@ export const authAPI = {
         return instatce.post('/auth/login', data)
     },
 
-    register(data: any) {
-        return instatce.post('/auth/register', data)
-    }
+   authMe() {
+        return instatce.post('/auth/me', {})
+   }
 }

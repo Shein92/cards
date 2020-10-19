@@ -1,5 +1,7 @@
 import {authAPI} from "../api/cardsAPI";
 import {Dispatch} from "redux";
+import {setupProfileAC} from "./profile-reducer";
+import {setIsLoggedAC} from "./app-reducer";
 
 let initialState: LoginStateType = {
     isLogged: false,
@@ -8,8 +10,6 @@ let initialState: LoginStateType = {
 
 export const loginReducer = (state: LoginStateType = initialState, action: ActionsType): LoginStateType => {
     switch (action.type) {
-        case "login/SET-IS-LOGGED":
-            return {...state, isLogged: action.value}
         case 'login/SET-ERROR-LOGIN':
             return {...state, error: action.error}
         default: {
@@ -20,9 +20,6 @@ export const loginReducer = (state: LoginStateType = initialState, action: Actio
 
 
 //Actions Creators
-const setIsLoggedAC = (value: boolean) => {
-    return {type: 'login/SET-IS-LOGGED', value} as const
-}
 const setErrorLoginAC = (error: string) => {
     return {type: 'login/SET-ERROR-LOGIN', error} as const
 }
@@ -32,6 +29,7 @@ const setErrorLoginAC = (error: string) => {
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
     authAPI.login(data)
         .then(res => {
+            dispatch(setupProfileAC(res.data))
             dispatch(setIsLoggedAC(true))
         })
         .catch(e => {
@@ -48,7 +46,10 @@ export type LoginStateType = {
 }
 
 
-export type ActionsType = ReturnType<typeof setIsLoggedAC> | ReturnType<typeof setErrorLoginAC>;
+export type ActionsType =
+    | ReturnType<typeof setIsLoggedAC>
+    | ReturnType<typeof setErrorLoginAC>
+    | ReturnType<typeof setupProfileAC>;
 
 export type LoginParamsType = {
     email: string

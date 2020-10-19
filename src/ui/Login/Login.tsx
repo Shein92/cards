@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './Login.module.css';
 import inputStyle from '../Common/Input/Input.module.css'
 import buttonStyle from '../Common/Button/Button.module.css'
@@ -7,14 +7,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../bll/login-reducer";
 import {AppRootStateType} from "../../bll/store";
 import { Redirect } from 'react-router-dom';
+import {authMeTC} from "../../bll/profile-reducer";
 
 type LoginPropType = any
 
 const Login = React.memo((props: LoginPropType) => {
-	const isLogged = useSelector<AppRootStateType, boolean>(state => state.login.isLogged)
+	const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
 	const isError = useSelector<AppRootStateType, string>(state => state.login.error)
 	const dispatch = useDispatch()
-
+	useEffect(() => {
+		dispatch(authMeTC())
+	}, [])
 	const formik = useFormik({
 		initialValues: {
 			email: '',
