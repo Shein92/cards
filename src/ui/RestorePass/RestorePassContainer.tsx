@@ -6,7 +6,7 @@ import { restorePassTC } from '../../bll/restorePas-reducer';
 import { AppRootStateType } from '../../bll/store';
 import { profile } from '../Routes/routes';
 
-const RestorePassContainer = () => {
+const RestorePassContainer = React.memo(() => {
 
 	let answer = useSelector<AppRootStateType, string>(ans => ans.restorePassword.answer);
 	const isRestored = useSelector<AppRootStateType, boolean>(ans => ans.restorePassword.isRestored);
@@ -49,7 +49,7 @@ const RestorePassContainer = () => {
 		}
 	});
 
-	if (isRestored) {return <Redirect to={profile}/>}
+	if (isRestored) { return <Redirect to={profile} /> }
 
 	return (
 		<div>
@@ -89,6 +89,6 @@ const RestorePassContainer = () => {
 	// return (
 	// 	<RestorePass/>
 	// )
-}
+})
 
 export default RestorePassContainer;

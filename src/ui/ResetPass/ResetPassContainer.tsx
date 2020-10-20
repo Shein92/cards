@@ -6,7 +6,7 @@ import { resetPassTC } from '../../bll/resetPass-reducer';
 import { AppRootStateType } from '../../bll/store';
 import { profile } from '../Routes/routes';
 
-const ResetPassContainer = () => {
+const ResetPassContainer = React.memo(() => {
 
 	let answer = useSelector<AppRootStateType, string>(ans => ans.resetPassword.answer);
 	let isReseted = useSelector<AppRootStateType, boolean>(ans => ans.resetPassword.isReseted);
@@ -56,6 +56,6 @@ const ResetPassContainer = () => {
 			{answer}
 		</div>
 	);
-}
+})
 
 export default ResetPassContainer;
