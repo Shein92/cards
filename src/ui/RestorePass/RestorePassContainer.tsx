@@ -5,6 +5,9 @@ import { Redirect, useParams } from 'react-router-dom';
 import { restorePassTC } from '../../bll/restorePas-reducer';
 import { AppRootStateType } from '../../bll/store';
 import { profile } from '../Routes/routes';
+import style from './RestorePass.module.css';
+import inputStyle from '../Common/Input/Input.module.css';
+import btn from '../Common/Button/Button.module.css';
 
 const RestorePassContainer = React.memo(() => {
 
@@ -52,10 +55,14 @@ const RestorePassContainer = React.memo(() => {
 	if (isRestored) { return <Redirect to={profile} /> }
 
 	return (
-		<div>
+		<div className={style.restorePass} style={{textAlign: 'center'}}>
 			<form onSubmit={formik.handleSubmit}>
 				<div>
-					<input type="passwod"
+					<div>
+						<span>Password: </span>
+					</div>
+					<input className={inputStyle.inputStyle}
+						type="passwod"
 						name={"password"}
 						onChange={formik.handleChange}
 						value={formik.values.password}
@@ -65,7 +72,11 @@ const RestorePassContainer = React.memo(() => {
 					</div> : null}
 				</div>
 				<div>
-					<input type="passwod"
+					<div>
+						<span>Repeat password</span>
+					</div>
+					<input className={inputStyle.inputStyle}
+						type="passwod"
 						name={"secondPassword"}
 						onChange={formik.handleChange}
 						value={formik.values.secondPassword}
@@ -75,7 +86,8 @@ const RestorePassContainer = React.memo(() => {
 					</div> : null}
 				</div>
 				<div>
-					<button type={"submit"}
+					<button className={btn.btn} 
+						type={"submit"}
 						disabled={formik.values.password !== formik.values.secondPassword}
 					>Send</button>
 				</div>

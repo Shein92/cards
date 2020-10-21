@@ -5,6 +5,9 @@ import { Redirect } from 'react-router-dom';
 import { resetPassTC } from '../../bll/resetPass-reducer';
 import { AppRootStateType } from '../../bll/store';
 import { profile } from '../Routes/routes';
+import style from './ResetPass.module.css';
+import inputStyle from '../Common/Input/Input.module.css';
+import btn from '../Common/Button/Button.module.css';
 
 const ResetPassContainer = React.memo(() => {
 
@@ -38,9 +41,12 @@ const ResetPassContainer = React.memo(() => {
 	if (isReseted) return <Redirect to={profile} />
 
 	return (
-		<div>
+		<div className={style.resetPass}>
 			<form onSubmit={formik.handleSubmit}>
-				<input
+				<div>
+					<span>Your email adress: </span>
+				</div>
+				<input className={inputStyle.inputStyle}
 					name={'email'}
 					type={"text"}
 					onChange={formik.handleChange}
@@ -50,7 +56,8 @@ const ResetPassContainer = React.memo(() => {
 					{formik.errors.email}
 				</div> : null}
 				<div>
-					<button type={"submit"}>Submit</button>
+					<button className={btn.btn} 
+					type={"submit"}>Submit</button>
 				</div>
 			</form>
 			{answer}
