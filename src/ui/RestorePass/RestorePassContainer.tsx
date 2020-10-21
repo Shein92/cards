@@ -11,7 +11,7 @@ const RestorePassContainer = React.memo(() => {
 	let answer = useSelector<AppRootStateType, string>(ans => ans.restorePassword.answer);
 	const isRestored = useSelector<AppRootStateType, boolean>(ans => ans.restorePassword.isRestored);
 	const dispatch = useDispatch();
-	const { token } = useParams();
+	let { token } = useParams();
 
 	type FormikErrorType = {
 		password?: string
