@@ -49,7 +49,6 @@ export const restorePassTC = (password: string, token: string) => {
 		restorePassAPI.restorePass(password, token)
 			.then(res => {
 				dispatch(changeRestoreAnswerAC(res.data.info));
-				dispatch(changeRestoreAnswerAC(res.data.error));
 				dispatch(restoreSendAC(true))
 			})
 			.catch(err => {

@@ -36,16 +36,17 @@ const Login = React.memo((props: LoginPropType) => {
 			const errors: FormikErrorType = {};
 
 			if (!values.email) {
-				errors.email = 'Required';
+				errors.email = "Requires"
 			} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-				errors.email = 'Invalid email adress';
+				errors.email = "Invalid email adress"
 			}
 
 			if (!values.password) {
-				errors.password = 'Required'
+				errors.password = 'Required';
 			} else if (values.password.length < 7) {
-				errors.password = 'Password must be equal or more than 7 characters'
+				errors.password = 'Password must be equal or more than 7 characters';
 			}
+			return errors;
 		},
 		onSubmit: values => {
 			dispatch(loginTC(values))
