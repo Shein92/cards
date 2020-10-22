@@ -32,13 +32,13 @@ const RestorePassContainer = React.memo(() => {
 			if (!values.password) {
 				errors.password = 'Required';
 			} else if (values.password.length < 7) {
-				errors.password = 'Password must be more than 5 characters';
+				errors.password = 'Password must be equal or more than 7 characters';
 			}
 
 			if (!values.secondPassword) {
 				errors.secondPassword = 'Required'
 			} else if (values.secondPassword.length < 7) {
-				errors.secondPassword = 'Password must be more than 7 characters';
+				errors.secondPassword = 'Password must be equal or more than 7 characters';
 			}
 
 			if (values.password !== values.secondPassword) {
@@ -62,8 +62,9 @@ const RestorePassContainer = React.memo(() => {
 						<span>Password: </span>
 					</div>
 					<input className={inputStyle.inputStyle}
-						type="passwod"
+						type="password"
 						name={"password"}
+						placeholder={'Password'}
 						onChange={formik.handleChange}
 						value={formik.values.password}
 					/>
@@ -76,8 +77,9 @@ const RestorePassContainer = React.memo(() => {
 						<span>Repeat password</span>
 					</div>
 					<input className={inputStyle.inputStyle}
-						type="passwod"
+						type="password"
 						name={"secondPassword"}
+						placeholder={'Password'}
 						onChange={formik.handleChange}
 						value={formik.values.secondPassword}
 					/>

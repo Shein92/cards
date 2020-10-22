@@ -49,6 +49,7 @@ const ResetPassContainer = React.memo(() => {
 				<input className={inputStyle.inputStyle}
 					name={'email'}
 					type={"text"}
+					placeholder={'E-mail'}
 					onChange={formik.handleChange}
 					value={formik.values.email}
 				/>
