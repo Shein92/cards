@@ -1,4 +1,4 @@
-import { resetPassAPI } from './../dal/API-resetPass';
+import { resetPassAPI } from '../api/resetPassAPI';
 import { Dispatch } from "redux";
 
 export type ResetPassStateType = {

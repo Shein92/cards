@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { restorePassAPI } from "../dal/API-restorePass";
+import { restorePassAPI } from "../api/restorePassAPI";
 
 export type RestorePassStateType = {
 	answer: string,
