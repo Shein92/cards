@@ -6,8 +6,9 @@ import NewPassContainer from '../NewPass/NewPassContainer';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProfileContainer from '../Profile/ProfileContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
+import ResetPassContainer from '../ResetPass/ResetPassContainer';
 import RestorePassContainer from '../RestorePass/RestorePassContainer';
-import { login, newPass, profile, registration, restorePass } from '../Routes/routes';
+import { login, newPass, profile, registration, resetPass, restorePass } from '../Routes/routes';
 
 const Main = () => {
 	return (
@@ -16,7 +17,8 @@ const Main = () => {
 			<Switch>
 				<Route path={login} render={() => <LoginContainer />} />
 				<Route path={newPass} render={() => <NewPassContainer />} />
-				<Route path={restorePass} render={() => <RestorePassContainer />} />
+				<Route path={restorePass + '/:token'} render={() => <RestorePassContainer />} />
+				<Route path={resetPass} render={() => <ResetPassContainer/>}/>
 				<Route path={profile} render={() => <ProfileContainer />} />
 				<Route path={registration} render={() => <RegistrationContainer />} />
 				<Route render={() => <PageNotFound/>}/>

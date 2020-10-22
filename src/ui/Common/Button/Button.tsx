@@ -3,18 +3,25 @@ import style from './Button.module.css';
 
 type ButtonPropsType = {
 	text: string,
-	onClick: () => void,
-	type?: 'submit'
+	onClick?: () => void
+	type?: "button" | "submit" | "reset" | undefined
+	onSubmit?: () => void
 };
 
 const Button = (props: ButtonPropsType) => {
 
 	const onClick = () => {
-		props.onClick();
+		if (props.onClick) {
+			props.onClick()
+		}
 	}
 
 	return (
-		<button type={props.type} onClick={onClick} className={style.btn}>{props.text}</button>
+		<button onClick={onClick}
+			onSubmit={props.onSubmit}
+			className={style.btn}
+			type={props.type}
+		>{props.text}</button>
 	)
 }
 
