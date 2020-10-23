@@ -55,7 +55,7 @@ const RestorePassContainer = React.memo(() => {
 	if (isRestored) { return <Redirect to={profile} /> }
 
 	return (
-		<div className={style.restorePass} style={{textAlign: 'center'}}>
+		<div className={style.restorePass} style={{ textAlign: 'center' }}>
 			<form onSubmit={formik.handleSubmit}>
 				<div>
 					<div>
@@ -88,7 +88,7 @@ const RestorePassContainer = React.memo(() => {
 					</div> : null}
 				</div>
 				<div>
-					<button className={btn.btn} 
+					<button className={btn.btn}
 						type={"submit"}
 						disabled={formik.values.password !== formik.values.secondPassword}
 					>Send</button>
