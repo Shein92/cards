@@ -1,5 +1,6 @@
 import { resetPassAPI } from '../api/resetPassAPI';
 import { Dispatch } from "redux";
+import {setIsLoadingAC} from "./app-reducer";
 
 export type ResetPassStateType = {
 	answer: string,
@@ -47,11 +48,14 @@ export const resetSendAC = (send: boolean): IsResetSentActionType => {
 //thunk
 export const resetPassTC = (email: string) => {
 	return (dispatch: Dispatch) => {
+		dispatch(setIsLoadingAC(true))
 		resetPassAPI.resetPass(email)
 			.then(res => {
+				dispatch(setIsLoadingAC(false))
 				dispatch(changeResetAnswerAC(res.data.info));
 			})
 			.catch(err => {
+				dispatch(setIsLoadingAC(false))
 				dispatch(changeResetAnswerAC(err.message));
 				console.log(err);
 			})

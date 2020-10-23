@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {registerAPI, RegistrationParamsType} from "../api/registrationApi";
+import {setIsLoadingAC} from "./app-reducer";
 
 export type RegistrationStateType = any
 
@@ -28,13 +29,15 @@ export const registrationAC = (value: boolean) =>
 
 // thunks
 export const registrationTC = (data: RegistrationParamsType) => (dispatch: Dispatch) => {
-    debugger
+    dispatch(setIsLoadingAC(true))
     registerAPI.registration(data)
         .then(res => {
+                dispatch(setIsLoadingAC(false))
                 dispatch(registrationAC(true))
             }
         )
         .catch((err) => {
+            dispatch(setIsLoadingAC(false))
         })
 }
 

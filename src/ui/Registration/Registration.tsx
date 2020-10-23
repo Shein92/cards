@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "../../bll/store";
 import { Redirect } from 'react-router-dom'
 import { registrationTC } from "../../bll/registration-reducer";
+import {Loading} from "../Common/Loading/Loading";
 
 type RegistrationPropsType = any
 
 const Registration = (props: RegistrationPropsType) => {
 
 	const isRegistred = useSelector<AppRootStateType, boolean>(state => state.registration.isRegistred);
+	const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
 	const dispatch = useDispatch()
 
 	type FormikErrorType = {
@@ -65,6 +67,7 @@ const Registration = (props: RegistrationPropsType) => {
 
 	return (
 		<div className={style.registration}>
+			{ isLoading && <Loading />}
 			<h2>Registration Page</h2>
 			<div className={style.login}>
 				<form onSubmit={formik.handleSubmit}>

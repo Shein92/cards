@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { restorePassAPI } from "../api/restorePassAPI";
+import {setIsLoadingAC} from "./app-reducer";
 
 export type RestorePassStateType = {
 	answer: string,
@@ -46,12 +47,15 @@ export const restoreSendAC = (send: boolean): isRestoredActionType => {
 //thunk
 export const restorePassTC = (password: string, token: string) => {
 	return (dispatch: Dispatch) => {
+		dispatch(setIsLoadingAC(true))
 		restorePassAPI.restorePass(password, token)
 			.then(res => {
+				dispatch(setIsLoadingAC(false))
 				dispatch(changeRestoreAnswerAC(res.data.info));
 				dispatch(restoreSendAC(true))
 			})
 			.catch(err => {
+				dispatch(setIsLoadingAC(false))
 				console.log(err.error);
 			})
 	}
