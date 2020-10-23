@@ -31,12 +31,10 @@ export const registrationTC = (data: RegistrationParamsType) => (dispatch: Dispa
     debugger
     registerAPI.registration(data)
         .then(res => {
-                debugger
                 dispatch(registrationAC(true))
             }
         )
         .catch((err) => {
-            debugger
         })
 }
 

@@ -54,7 +54,6 @@ const Registration = (props: RegistrationPropsType) => {
 			return errors;
 		},
 		onSubmit: values => {
-			debugger
 			dispatch(registrationTC({ email: values.email, password: values.password }))
 		},
 	})
