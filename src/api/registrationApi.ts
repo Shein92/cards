@@ -25,7 +25,10 @@ export type RegistrationParamsType = {
 
 export const registerAPI = {
     registration<RegistrationResponse>(data: RegistrationParamsType) {
-        return instance.post('auth/register', {data})
+        return instance.post('auth/register', {
+            email: data.email,
+            password: data.password
+        })
     },
 }
 
