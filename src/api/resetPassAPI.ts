@@ -18,8 +18,9 @@ export const resetPassAPI = {
 			from: "test-front-admin <ai73a@yandex.by>",
 			message: `<div style="background-color: lime; padding: 15px">
             	password recovery link: 
-            	<a href='http://localhost:3000/cards#/restorePassword/$token$'>
+            	<a href='https://shein92.github.io/cards/#/restorePassword/$token$'>
             	link</a></div>`
 		})
+		// <a href='http://localhost:3000/cards#/restorePassword/$token$'>
 	},
 }

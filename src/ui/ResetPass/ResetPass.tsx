@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../Common/Button/Button';
 import Input from '../Common/Input/Input';
 import {Loading} from "../Common/Loading/Loading";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
+import { authMeTC } from '../../bll/profile-reducer';
 
 type ResetPassPropsType = {
     value: string,
@@ -13,7 +14,14 @@ type ResetPassPropsType = {
 }
 
 const ResetPass = (props: ResetPassPropsType) => {
-    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
+
+    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+		dispatch(authMeTC())
+	}, [])
+
     const onChange = (value: string) => {
         props.onChange(value);
     }
