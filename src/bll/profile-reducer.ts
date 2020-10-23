@@ -1,7 +1,7 @@
 import {authAPI} from "../api/cardsAPI";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "redux";
-import {setIsLoadingAC} from "./app-reducer";
+import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
 
 export type ProfileStateType = {
     _id: string
@@ -18,7 +18,8 @@ export type ProfileStateType = {
 
 export type ActionsType =
     | ReturnType<typeof setupProfileAC>
-    | ReturnType<typeof setIsLoadingAC>;
+    | ReturnType<typeof setIsLoadingAC>
+    | ReturnType<typeof setIsLoggedAC>;
 
 const initialState: ProfileStateType = {
     _id: '',
@@ -53,6 +54,7 @@ export const authMeTC = () => (dispatch: Dispatch<ActionsType>) => {
         .then(res => {
             dispatch(setIsLoadingAC(false))
             dispatch(setupProfileAC(res.data))
+            dispatch(setIsLoggedAC(true))
         })
         .catch(err => {
             dispatch(setIsLoadingAC(false))
