@@ -1,0 +1,89 @@
+import {Dispatch} from "redux";
+import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
+import {cardApi} from "../api/cardsAPI";
+
+let initialState: CardResponseType = {
+    cardPacks: [
+        {
+            _id: '',
+            user_id: '',
+            name: '',
+            user_name: '',
+            path: '',
+            grade: 0,
+            shots: 0,
+            rating: 0,
+            type: '',
+            created: '',
+            updated: '',
+            __v: 0
+        }
+    ],
+    cardPacksTotalCount: 0,
+    maxCardsCount: 0,
+    page: 0,
+    pageCount: 0
+}
+
+
+export const cardsReducer = (state: CardResponseType = initialState, action: ActionsType): CardResponseType => {
+    switch (action.type) {
+        case 'cards/GET-CARDS':
+            return {...action.cards}
+        default: {
+            return state
+        }
+    }
+}
+
+
+//Actions Creators
+const setCardsAC = (cards: CardResponseType) => {
+    return {type: 'cards/GET-CARDS', cards} as const
+}
+
+
+// Thunks
+export const getCardsTC = () => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setIsLoadingAC(true))
+    cardApi.getCardPack()
+        .then(res => {
+            dispatch(setIsLoadingAC(false))
+            dispatch(setCardsAC(res.data))
+        })
+        .catch(e => {
+            dispatch(setIsLoadingAC(false))
+        })
+}
+
+
+// Types
+
+export type CardPacksType = {
+    _id: string,
+    user_id: string,
+    user_name: string,
+    name: string,
+    path: string,
+    grade: number,
+    shots: number,
+    rating: number,
+    type: string,
+    created: string,
+    updated: string,
+    __v: number
+}
+
+export type CardResponseType = {
+    cardPacks: Array<CardPacksType>
+    cardPacksTotalCount: number
+    maxCardsCount: number
+    page: number
+    pageCount: number
+}
+
+export type ActionsType =
+    | ReturnType<typeof setIsLoggedAC>
+    | ReturnType<typeof setIsLoadingAC>
+    | ReturnType<typeof setCardsAC>;
+

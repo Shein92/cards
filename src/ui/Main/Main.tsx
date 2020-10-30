@@ -8,7 +8,8 @@ import ProfileContainer from '../Profile/ProfileContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import ResetPassContainer from '../ResetPass/ResetPassContainer';
 import RestorePassContainer from '../RestorePass/RestorePassContainer';
-import { login, newPass, profile, registration, resetPass, restorePass } from '../Routes/routes';
+import {cards, login, newPass, profile, registration, resetPass, restorePass} from '../Routes/routes';
+import CardsContainer from "../Cards/CardsContainer";
 
 const Main = () => {
 	return (
@@ -20,6 +21,7 @@ const Main = () => {
 				<Route path={restorePass + '/:token'} render={() => <RestorePassContainer />} />
 				<Route path={resetPass} render={() => <ResetPassContainer/>}/>
 				<Route path={profile} render={() => <ProfileContainer />} />
+				<Route path={cards} render={() => <CardsContainer />} />
 				<Route path={registration} render={() => <RegistrationContainer />} />
 				<Route render={() => <PageNotFound/>}/>
 			</Switch>
