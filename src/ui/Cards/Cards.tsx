@@ -3,16 +3,31 @@ import {CardPacksType} from "../../bll/cards-reducer";
 
 type CardsPropsType = {
     cards: Array<CardPacksType>
+    removeCardPack: (id: string) => void
 }
 
 const Cards = (props: CardsPropsType) => {
-    const rows = props.cards.map((card: any) =>
+    const removeHandler = (id: string) => {
+        props.removeCardPack(id)
+    }
+    const rows = props.cards.map((card) =>
         <tr key={card._id}>
             <td>{card.name}</td>
             <td>{card.user_name}</td>
             <td>{card.rating}</td>
             <td>{card.shots}</td>
-            <td>Add/Delete</td>
+            <td>
+                <div>
+                    <div>
+                        <button className="btn waves-effect waves-light" type="submit" name="action">
+                            <i className="material-icons">edit</i>
+                        </button>
+                        <button onClick={() => removeHandler(card._id)} className="btn waves-effect waves-light" type="submit" name="action">
+                            <i className="material-icons">delete_forever</i>
+                        </button>
+                    </div>
+                </div>
+            </td>
         </tr>
     )
     return (

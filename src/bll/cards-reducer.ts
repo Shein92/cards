@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
 import {cardApi} from "../api/cardsAPI";
+import {AddCardPackForm} from "../ui/Cards/NewCardPack/NewCardPack";
 
 let initialState: CardResponseType = {
     cardPacks: [
@@ -30,6 +31,9 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
     switch (action.type) {
         case 'cards/GET-CARDS':
             return {...action.cards}
+        case 'cards/REMOVE-CARD-PACK':
+            const newState=  {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
+            return newState
         default: {
             return state
         }
@@ -42,6 +46,10 @@ const setCardsAC = (cards: CardResponseType) => {
     return {type: 'cards/GET-CARDS', cards} as const
 }
 
+const setRemoveCardPack = (id: string) => {
+    return {type: 'cards/REMOVE-CARD-PACK', id} as const
+}
+
 
 // Thunks
 export const getCardsTC = () => (dispatch: Dispatch<ActionsType>) => {
@@ -50,6 +58,29 @@ export const getCardsTC = () => (dispatch: Dispatch<ActionsType>) => {
         .then(res => {
             dispatch(setIsLoadingAC(false))
             dispatch(setCardsAC(res.data))
+        })
+        .catch(e => {
+            dispatch(setIsLoadingAC(false))
+        })
+}
+
+export const removeCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setIsLoadingAC(true))
+    cardApi.removeCardPack(id)
+        .then(res => {
+            dispatch(setIsLoadingAC(false))
+            dispatch(setRemoveCardPack(id))
+        })
+        .catch(e => {
+            dispatch(setIsLoadingAC(false))
+        })
+}
+
+export const addCardPackTC = (data: AddCardPackForm) => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setIsLoadingAC(true))
+    cardApi.addCardPack(data)
+        .then(res => {
+            dispatch(setIsLoadingAC(false))
         })
         .catch(e => {
             dispatch(setIsLoadingAC(false))
@@ -85,5 +116,6 @@ export type CardResponseType = {
 export type ActionsType =
     | ReturnType<typeof setIsLoggedAC>
     | ReturnType<typeof setIsLoadingAC>
-    | ReturnType<typeof setCardsAC>;
+    | ReturnType<typeof setCardsAC>
+    | ReturnType<typeof setRemoveCardPack>
 
