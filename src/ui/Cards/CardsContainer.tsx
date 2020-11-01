@@ -7,7 +7,7 @@ import {CardPacksType, CardResponseType, getCardsTC, removeCardPackTC} from "../
 import Cards from "./Cards";
 import {NewCardPack} from './NewCardPack/NewCardPack';
 import styles from "./Cards.module.css"
-import {Modal} from "../Modal/Modal";
+import {Modal} from "../Common/Modal/Modal";
 
 type ProfilePropsType = any
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {CardPacksType} from "../../bll/cards-reducer";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../bll/store";
 
-type CardsPropsType = {
-    cards: Array<CardPacksType>
-    removeCardPack: (id: string) => void
-}
+
 
 const Cards = (props: CardsPropsType) => {
+    const userId = useSelector<AppRootStateType,string>(state => state.profile._id)
     const removeHandler = (id: string) => {
         props.removeCardPack(id)
     }
@@ -19,10 +19,10 @@ const Cards = (props: CardsPropsType) => {
             <td>
                 <div>
                     <div>
-                        <button className="btn waves-effect waves-light" type="submit" name="action">
+                        <button disabled={userId !== card.user_id} className="btn waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">edit</i>
                         </button>
-                        <button onClick={() => removeHandler(card._id)} className="btn waves-effect waves-light" type="submit" name="action">
+                        <button disabled={userId !== card.user_id} onClick={() => removeHandler(card._id)} className="btn waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">delete_forever</i>
                         </button>
                     </div>
@@ -51,3 +51,11 @@ const Cards = (props: CardsPropsType) => {
 }
 
 export default Cards;
+
+
+// types
+
+type CardsPropsType = {
+    cards: Array<CardPacksType>
+    removeCardPack: (id: string) => void
+}
