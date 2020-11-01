@@ -5,7 +5,9 @@ import {Redirect} from 'react-router-dom';
 import {Loading} from "../Common/Loading/Loading";
 import {CardPacksType, CardResponseType, getCardsTC, removeCardPackTC} from "../../bll/cards-reducer";
 import Cards from "./Cards";
-import { NewCardPack } from './NewCardPack/NewCardPack';
+import {NewCardPack} from './NewCardPack/NewCardPack';
+import styles from "./Cards.module.css"
+import {Modal} from "../Modal/Modal";
 
 type ProfilePropsType = any
 
@@ -13,15 +15,11 @@ const CardsContainer = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
-    const [showForm, setShoForm] = useState(false)
+    const [modalActive, setModalActive] = useState<boolean>(false)
     const dispatch = useDispatch()
 
     const removeCardPack = (id: string) => {
         dispatch(removeCardPackTC(id))
-    }
-
-    const addCardPackHandler = () => {
-        setShoForm(true)
     }
 
     useEffect(() => {
@@ -35,19 +33,21 @@ const CardsContainer = (props: ProfilePropsType) => {
 
     return (
 
-        <div className={'cards'}>
+        <div className={styles.cards}>
             {isLoading && <Loading/>}
-            {showForm && <NewCardPack/>}
             <div>
                 <div>
                     <h1>CARDS</h1>
-                    <button onClick={addCardPackHandler} className="btn waves-effect waves-light" type="submit"
+                    <button onClick={() => setModalActive(true)} className="btn waves-effect waves-light" type="submit"
                             name="action">New Pack
                         <i className="material-icons right">add</i>
                     </button>
                 </div>
                 <Cards cards={cards} removeCardPack={removeCardPack}/>
             </div>
+            <Modal modalActive={modalActive} setModalActive={setModalActive}>
+                <NewCardPack/>
+            </Modal>
         </div>
     )
 }

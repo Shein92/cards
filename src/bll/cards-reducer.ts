@@ -1,7 +1,10 @@
 import {Dispatch} from "redux";
+import {ThunkDispatch} from "redux-thunk"
 import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
 import {cardApi} from "../api/cardsAPI";
 import {AddCardPackForm} from "../ui/Cards/NewCardPack/NewCardPack";
+import {AppRootStateType} from "./store";
+
 
 let initialState: CardResponseType = {
     cardPacks: [
@@ -32,7 +35,7 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
         case 'cards/GET-CARDS':
             return {...action.cards}
         case 'cards/REMOVE-CARD-PACK':
-            const newState=  {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
+            const newState = {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
             return newState
         default: {
             return state
@@ -76,10 +79,11 @@ export const removeCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>
         })
 }
 
-export const addCardPackTC = (data: AddCardPackForm) => (dispatch: Dispatch<ActionsType>) => {
+export const addCardPackTC = (data: AddCardPackForm) => (dispatch: ThunkDispatch<AppRootStateType, {}, ActionsType>) => {
     dispatch(setIsLoadingAC(true))
     cardApi.addCardPack(data)
         .then(res => {
+            dispatch(getCardsTC())
             dispatch(setIsLoadingAC(false))
         })
         .catch(e => {
