@@ -1,6 +1,8 @@
 import axios from 'axios'
 import {LoginParamsType} from "../bll/login-reducer";
 import {AddCardPackForm} from "../ui/Cards/NewCardPack/NewCardPack";
+import {EditCardPackType} from "../ui/Cards/EditCardPack/EditCardPack";
+import {UpdateCardPackType} from "../bll/cards-reducer";
 
 
 const settings = {
@@ -36,7 +38,7 @@ export const cardApi = {
     removeCardPack(id: string) {
         return instatce.delete(`/cards/pack?id=${id}`)
     },
-    updateCardPack() {
-
+    updateCardPack(data: UpdateCardPackType) {
+        return instatce.put(`cards/pack`, {cardsPack: data})
     }
 }

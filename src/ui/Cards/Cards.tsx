@@ -4,11 +4,14 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 
 
-
 const Cards = (props: CardsPropsType) => {
-    const userId = useSelector<AppRootStateType,string>(state => state.profile._id)
+    const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
     const removeHandler = (id: string) => {
         props.removeCardPack(id)
+    }
+
+    const updateHandler = (id: string, name: string) => {
+        props.updateHandler(id, name)
     }
     const rows = props.cards.map((card) =>
         <tr key={card._id}>
@@ -19,10 +22,12 @@ const Cards = (props: CardsPropsType) => {
             <td>
                 <div>
                     <div>
-                        <button disabled={userId !== card.user_id} className="btn waves-effect waves-light" type="submit" name="action">
+                        <button style={{marginRight: '5px'}} disabled={userId !== card.user_id} onClick={() => updateHandler(card._id, card.name)}
+                                className="btn waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">edit</i>
                         </button>
-                        <button disabled={userId !== card.user_id} onClick={() => removeHandler(card._id)} className="btn waves-effect waves-light" type="submit" name="action">
+                        <button disabled={userId !== card.user_id} onClick={() => removeHandler(card._id)}
+                                className="btn red waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">delete_forever</i>
                         </button>
                     </div>
@@ -58,4 +63,5 @@ export default Cards;
 type CardsPropsType = {
     cards: Array<CardPacksType>
     removeCardPack: (id: string) => void
+    updateHandler: (id: string, name: string) => void
 }

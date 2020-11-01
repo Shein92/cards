@@ -91,6 +91,18 @@ export const addCardPackTC = (data: AddCardPackForm) => (dispatch: ThunkDispatch
         })
 }
 
+export const updateCardPackTC = (data: UpdateCardPackType) => (dispatch: ThunkDispatch<AppRootStateType, {}, ActionsType>) => {
+    dispatch(setIsLoadingAC(true))
+    cardApi.updateCardPack(data)
+        .then(res => {
+            dispatch(getCardsTC())
+            dispatch(setIsLoadingAC(false))
+        })
+        .catch(e => {
+            dispatch(setIsLoadingAC(false))
+        })
+}
+
 
 // Types
 
@@ -115,6 +127,11 @@ export type CardResponseType = {
     maxCardsCount: number
     page: number
     pageCount: number
+}
+
+export type UpdateCardPackType = {
+    _id: string
+    name: string
 }
 
 export type ActionsType =
