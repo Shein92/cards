@@ -46,7 +46,7 @@ const CardsContainer = (props: ProfilePropsType) => {
                 <Cards cards={cards} removeCardPack={removeCardPack}/>
             </div>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
-                <NewCardPack/>
+                <NewCardPack setModalActive={setModalActive}/>
             </Modal>
         </div>
     )

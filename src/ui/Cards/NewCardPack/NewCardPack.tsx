@@ -8,20 +8,24 @@ export type AddCardPackForm = {
     path?: string
 }
 
-type NewCardPackPropsType = {}
+type NewCardPackPropsType = {
+    setModalActive: (value: boolean) => void
+}
 
-export const NewCardPack = (props: NewCardPackPropsType) => {
+export const NewCardPack = ({setModalActive}: NewCardPackPropsType) => {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             name: '',
             path: ''
         },
-        onSubmit: values => {
+        onSubmit: (values) => {
             dispatch(addCardPackTC(values))
+            setModalActive(false)
+            values.name = ''
+            values.path = ''
         }
     })
-
 
     return (
         <div className="row">
@@ -29,23 +33,25 @@ export const NewCardPack = (props: NewCardPackPropsType) => {
                 <div className="row">
                     <div className="input-field col s6">
                         <input
+                            placeholder={'Name'}
                             id="name"
                             name="name"
                             type="text"
                             className="validate"
                             {...formik.getFieldProps('name')}
                         />
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name" className="active"/>
                     </div>
                     <div className="input-field col s6">
                         <input
+                            placeholder={'Path'}
                             id="path"
                             name={"path"}
                             type="text"
                             className="validate"
                             {...formik.getFieldProps('path')}
                         />
-                        <label htmlFor="path">Path</label>
+                        <label htmlFor="path" className="active"/>
                     </div>
                     <div>
                         <button className="btn waves-effect waves-light" type="submit"
