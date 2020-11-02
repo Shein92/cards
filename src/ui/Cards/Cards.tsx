@@ -20,7 +20,7 @@ const Cards = (props: CardsPropsType) => {
             <td>{card.rating}</td>
             <td>{card.shots}</td>
             <td>
-                <div>
+                <div>   
                     <div>
                         <button style={{marginRight: '5px'}} disabled={userId !== card.user_id} onClick={() => updateHandler(card._id, card.name)}
                                 className="btn waves-effect waves-light" type="submit" name="action">
