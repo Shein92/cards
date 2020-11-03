@@ -8,8 +8,9 @@ import ProfileContainer from '../Profile/ProfileContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import ResetPassContainer from '../ResetPass/ResetPassContainer';
 import RestorePassContainer from '../RestorePass/RestorePassContainer';
-import {cards, login, newPass, profile, registration, resetPass, restorePass} from '../Routes/routes';
+import {card, cards, login, newPass, profile, registration, resetPass, restorePass} from '../Routes/routes';
 import CardsContainer from "../Cards/CardsContainer";
+import CardContainer from '../Card/CardContainer';
 
 const Main = () => {
 	return (
@@ -17,11 +18,13 @@ const Main = () => {
 			<Header />
 			<Switch>
 				<Route path={login} render={() => <LoginContainer />} />
-				<Route path={newPass} render={() => <NewPassContainer />} />
+				{/* <Route path={newPass} render={() => <NewPassContainer />} /> */}
 				<Route path={restorePass + '/:token'} render={() => <RestorePassContainer />} />
 				<Route path={resetPass} render={() => <ResetPassContainer/>}/>
 				<Route path={profile} render={() => <ProfileContainer />} />
 				<Route path={cards} render={() => <CardsContainer />} />
+				<Route path={card  + '/:cardId'} render={() => <CardContainer/>}/>
+				<Route path={card} render={() => <CardContainer/>}/>
 				<Route path={registration} render={() => <RegistrationContainer />} />
 				<Route render={() => <PageNotFound/>}/>
 			</Switch>

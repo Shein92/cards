@@ -27,3 +27,17 @@ export const authAPI = {
         return instatce.delete('/auth/me', {})
     }
 }
+export const cardApi = {
+    getCardPack() {
+        return instatce.get('/cards/pack')
+    },
+    addCardPack(data: AddCardPackForm) {
+        return instatce.post('/cards/pack', {cardsPack: data})
+    },
+    removeCardPack(id: string) {
+        return instatce.delete(`/cards/pack?id=${id}`)
+    },
+    updateCardPack(data: UpdateCardPackType) {
+        return instatce.put(`cards/pack`, {cardsPack: data})
+    }
+}
