@@ -7,26 +7,15 @@ import {AppRootStateType} from "./store";
 
 
 let initialState: CardResponseType = {
-    cardPacks: [
-        {
-            _id: '',
-            user_id: '',
-            name: '',
-            user_name: '',
-            path: '',
-            grade: 0,
-            shots: 0,
-            rating: 0,
-            type: '',
-            created: '',
-            updated: '',
-            __v: 0
-        }
-    ],
+    cardPacks: [],
     cardPacksTotalCount: 0,
     maxCardsCount: 0,
     page: 0,
-    pageCount: 0
+    pageCount: 10,
+    min: 0,
+    max: 20,
+    packName: '',
+    sortPacks: '0update',
 }
 
 
@@ -37,6 +26,8 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
         case 'cards/REMOVE-CARD-PACK':
             const newState = {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
             return newState
+        case "cards/SET-CURRENT-PAGE":
+            return {...state, page: action.currentPage}
         default: {
             return state
         }
@@ -53,12 +44,15 @@ const setRemoveCardPack = (id: string) => {
     return {type: 'cards/REMOVE-CARD-PACK', id} as const
 }
 
+export const setCurrentPageAC = (currentPage: number) => ({type: 'cards/SET-CURRENT-PAGE', currentPage} as const)
+
 
 // Thunks
-export const getCardsTC = () => (dispatch: Dispatch<ActionsType>) => {
+export const getCardsTC = (packName?: string, min: number = 0, max: number = 100, sortPacks: string = '0updates', page: number = 1, pageCount: number = 10, userId?: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setIsLoadingAC(true))
-    cardApi.getCardPack()
+    cardApi.getCardPack(packName, min, max, sortPacks, page, pageCount)
         .then(res => {
+            console.log(res)
             dispatch(setIsLoadingAC(false))
             dispatch(setCardsAC(res.data))
         })
@@ -126,7 +120,22 @@ export type CardResponseType = {
     cardPacksTotalCount: number
     maxCardsCount: number
     page: number
+    pageCount: number,
+    packName: string,
+    min: number,
+    max: number,
+    sortPacks: string,
+
+}
+
+export type InitialStateCardPacks = {
+    cardPacks: Array<CardPacksType>
+    cardPacksTotalCount: number
+    maxCardsCount: number
+    page: number
     pageCount: number
+    min: number
+    max: number
 }
 
 export type UpdateCardPackType = {
@@ -139,4 +148,5 @@ export type ActionsType =
     | ReturnType<typeof setIsLoadingAC>
     | ReturnType<typeof setCardsAC>
     | ReturnType<typeof setRemoveCardPack>
+    | ReturnType<typeof setCurrentPageAC>
 

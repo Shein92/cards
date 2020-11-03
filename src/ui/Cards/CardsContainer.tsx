@@ -20,6 +20,7 @@ const CardsContainer = (props: ProfilePropsType) => {
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
     const [modalActive, setModalActive] = useState<boolean>(false)
     const [modalUpdateActive, setUpdateModalActive] = useState<boolean>(false)
+
     const dispatch = useDispatch()
 
     const removeCardPack = (id: string) => {
