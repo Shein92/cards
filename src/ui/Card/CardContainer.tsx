@@ -8,9 +8,11 @@ import { Modal } from '../Common/Modal/Modal';
 import AddNewCard from './AddNewCard/AddNewCard';
 import Card from './Card';
 import EditCard from './EditCard/EditCard';
+import {log} from "util";
 
 type CardContainerPropsType = any
-
+let idCard: string = '';
+let cardName: string = '';
 const CardContainer = (props: CardContainerPropsType) => {
 
 	const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged);
@@ -20,8 +22,7 @@ const CardContainer = (props: CardContainerPropsType) => {
 	const [newCardNameModal,setNewCardNameModal] = useState(false);
 	let { cardId } = useParams();
 	const dispatch = useDispatch();
-	let idCard: string = '';
-	let cardName: string = '';
+
 	useEffect(() => {
 		dispatch(getCardTC(cardId));
 		// alert(cardId);

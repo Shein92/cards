@@ -105,6 +105,7 @@ export type CardPacksType = {
     user_id: string,
     user_name: string,
     name: string,
+    cardsCount: number
     path: string,
     grade: number,
     shots: number,

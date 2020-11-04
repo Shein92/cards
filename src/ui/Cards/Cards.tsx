@@ -34,6 +34,7 @@ const Cards = (props: CardsPropsType) => {
                 <td>{card.name}</td>
             </NavLink>
             <td>{card.user_name}</td>
+            <td>{card.cardsCount}</td>
             <td>{card.rating}</td>
             <td>{card.shots}</td>
             <td>
@@ -60,6 +61,7 @@ const Cards = (props: CardsPropsType) => {
                     <tr>
                         <th>Name</th>
                         <th>User Name</th>
+                        <th>Cards Count</th>
                         <th>Rating</th>
                         <th>Shots</th>
                         <th>Manage</th>
