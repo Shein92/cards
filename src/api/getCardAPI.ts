@@ -11,11 +11,11 @@ const instance = axios.create({
 });
 
 export const getCardAPI = {
-	getCardsFromPack(packId: string, min: string = '1', max: string = '4', page: string = '1', pageCount: string = '7') {
-		return axios.get(`cards/card??cardAnswer=english&cardQuestion=english&cardsPack_id=${packId}&min=${min}&max=${max}&sortCards=0grade&page=${page}$pageCount=${pageCount}`)
+	getCardsFromPack(packId: string, min: string = '1', max: string = '4', page: string = '1', pageCount: string = '7', cardAnswer: string = 'english', cardQuestion: string = 'english') {
+		return axios.get(`cards/card?cardAnswer=${cardAnswer}&cardQuestion=${cardQuestion}&cardsPack_id=${packId}&min=${min}&max=${max}&sortCards=0grade&page=${page}$pageCount=${pageCount}`)
 	},
-	addCard(packId: string) {
-		return axios.post<CardResType>('cards/card', {card: {cardsPack_id: packId}})
+	addCard(packId: string, question?: string, answer?: string) {
+		return axios.post<CardResType>('cards/card', {card: {cardsPack_id: packId, question, answer}})
 	},
 	removeCard(cardId: string) {
 		return axios.delete(`cards/card?id=${cardId}`)
