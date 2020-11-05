@@ -1,9 +1,12 @@
+
 import React, { useEffect } from 'react';
-import { CardPacksType, CardResponseType, getCardsTC, setCurrentPageAC } from "../../bll/cards-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "../../bll/store";
 import { NavLink } from 'react-router-dom';
 import { Paginator } from '../Common/Paginator/Paginator';
+import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/cards-reducer";
+import {Paginator} from "../Common/Paginator/Paginator";
+
 
 
 const Cards = (props: CardsPropsType) => {
@@ -25,6 +28,10 @@ const Cards = (props: CardsPropsType) => {
 
     const onChangePage = (currentPage: number) => {
         dispatch(setCurrentPageAC(currentPage))
+    }
+
+    const onChangeCountOnPage = (count: number) => {
+        dispatch(setCountOnPageAC(count))
     }
 
     const rows = props.cards.map((card) =>
@@ -74,16 +81,7 @@ const Cards = (props: CardsPropsType) => {
             {/*Pagination*/}
             <div>
                 <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page}
-                           portionsSize={10} onChangePage={onChangePage}/>
-                <div className={"pagination"}>
-                    <select className="browser-default">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
+                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>
             </div>
         </div>
     )
