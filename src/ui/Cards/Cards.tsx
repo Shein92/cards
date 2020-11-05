@@ -1,15 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {NavLink} from 'react-router-dom';
 import {Paginator} from '../Common/Paginator/Paginator';
 import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/cards-reducer";
+import FilterBtn from '../Common/FilterBtn/FilterBtn';
 
 
 const Cards = (props: CardsPropsType) => {
     const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
     const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
     const dispatch = useDispatch()
+    const [isNameOfPackArrowDown, setNameOfPackIsArrowDonw] = useState(false);
+    const [isNameOfCreatorArrowDown, setIsNameOfCreatorArrowDonw] = useState(false);
+    const [isQuantityOfCardsArrowDown, setIsQuantityOfCardsArrowDonw] = useState(false);
     useEffect(() => {
         if (props.filterById)
             dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
@@ -34,7 +38,6 @@ const Cards = (props: CardsPropsType) => {
 
     const rows = props.cards.map((card) =>
         <tr key={card._id}>
-
             <NavLink to={`card/${card._id}`}>
                 <td>{card.name}</td>
             </NavLink>
@@ -43,7 +46,7 @@ const Cards = (props: CardsPropsType) => {
             <td>{card.rating}</td>
             <td>{card.shots}</td>
             <td>
-                <div>
+                <div> 
                     <div>
                         <button style={{marginRight: '5px'}} disabled={userId !== card.user_id}
                                 onClick={() => updateHandler(card._id, card.name)}
@@ -64,9 +67,24 @@ const Cards = (props: CardsPropsType) => {
             <table className={"highlight"}>
                 <thead>
                 <tr>
-                    <th>Name <span>↓</span></th>
-                    <th>User Name</th>
-                    <th>Cards Count</th>
+                    <th>Name <FilterBtn filterDown={'0name'} filterUp={'1name'} isArrowDown={isNameOfPackArrowDown} setIsArrowDown={setNameOfPackIsArrowDonw}
+                    max={max}
+                    min={min}
+                    page={page}
+                    pageCount={pageCount}
+                    /></th>
+                    <th>User Name <FilterBtn filterDown={'0user_name'} filterUp={'1user_name'} isArrowDown={isNameOfCreatorArrowDown} setIsArrowDown={setIsNameOfCreatorArrowDonw}
+                    max={max}
+                    min={min}
+                    page={page}
+                    pageCount={pageCount}
+                    /></th>
+                    <th>Cards Count <FilterBtn filterDown={'0cardsCount'} filterUp={'1cardsCount'} isArrowDown={isQuantityOfCardsArrowDown} setIsArrowDown={setIsQuantityOfCardsArrowDonw}
+                    max={max}
+                    min={min}
+                    page={page}
+                    pageCount={pageCount}
+                    /></th>
                     <th>Rating</th>
                     <th>Shots</th>
                     <th>Manage</th>

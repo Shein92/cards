@@ -17,6 +17,7 @@ let initialState: CardResponseType = {
     packName: '',
     sortPacks: '0updated',
     user_id: '',
+
 }
 
 
@@ -28,9 +29,9 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
             const newState = {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
             return newState
         case "cards/SET-CURRENT-PAGE":
-            return {...state, page: action.currentPage}
+            return { ...state, page: action.currentPage }
         case "cards/SET-PAGE-COUNT":
-            return {...state, pageCount: action.count}
+            return { ...state, pageCount: action.count }
         default: {
             return state
         }
@@ -46,17 +47,20 @@ const setCardsAC = (cards: CardResponseType) => {
 const setRemoveCardPack = (id: string) => {
     return {type: 'cards/REMOVE-CARD-PACK', id} as const
 }
-export const setCurrentPageAC = (currentPage: number) => ({type: 'cards/SET-CURRENT-PAGE', currentPage} as const)
-export const setCountOnPageAC = (count: number) => ({type: 'cards/SET-PAGE-COUNT', count} as const)
+export const setCurrentPageAC = (currentPage: number) => ({ type: 'cards/SET-CURRENT-PAGE', currentPage } as const)
+export const setCountOnPageAC = (count: number) => ({ type: 'cards/SET-PAGE-COUNT', count } as const)
+
 
 
 // Thunks
+
 export const getCardsTC = (packName?: string, min: number = 0, max: number = 100, sortPacks: string = '0updates', page: number = 1, pageCount: number = 10, user_id?: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setIsLoadingAC(true))
     cardApi.getCardPack(packName, min, max, sortPacks, page, pageCount, user_id)
         .then(res => {
             dispatch(setIsLoadingAC(false))
             dispatch(setCardsAC(res.data))
+            // dispatch(setFilteronPageAC(sortPacks))
         })
         .catch(e => {
             dispatch(setIsLoadingAC(false))
@@ -155,4 +159,3 @@ export type ActionsType =
     | ReturnType<typeof setRemoveCardPack>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setCountOnPageAC>
-
