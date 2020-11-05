@@ -5,8 +5,6 @@ import { AppRootStateType } from "../../bll/store";
 import { NavLink } from 'react-router-dom';
 import { Paginator } from '../Common/Paginator/Paginator';
 import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/cards-reducer";
-import {Paginator} from "../Common/Paginator/Paginator";
-
 
 
 const Cards = (props: CardsPropsType) => {
