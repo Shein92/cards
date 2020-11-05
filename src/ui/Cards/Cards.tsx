@@ -8,12 +8,12 @@ import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurren
 
 const Cards = (props: CardsPropsType) => {
     const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
-    const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
+    const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks, user_id} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getCardsTC(packName, min, max, '0updates', page, pageCount))
-    }, [page, pageCount, packName, min, max, sortPacks, dispatch])
+        dispatch(getCardsTC(packName, min, max, '0updates', page, pageCount, user_id))
+    }, [page, pageCount, packName, min, max, sortPacks, user_id, dispatch])
 
     const removeHandler = (id: string) => {
         props.removeCardPack(id)

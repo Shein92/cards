@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {Redirect} from 'react-router-dom';
 import {Loading} from "../Common/Loading/Loading";
-import {CardPacksType, getCardsTC, removeCardPackTC} from "../../bll/cards-reducer";
+import {CardPacksType, getCardsTC, removeCardPackTC, setUserId} from "../../bll/cards-reducer";
 import Cards from "./Cards";
 import {NewCardPack} from './NewCardPack/NewCardPack';
 import styles from "./Cards.module.css"
@@ -19,6 +19,7 @@ const CardsContainer = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
+    const uid = useSelector<AppRootStateType, string>(state => state.profile._id)
     const [modalActive, setModalActive] = useState<boolean>(false)
     const [modalUpdateActive, setUpdateModalActive] = useState<boolean>(false)
 
@@ -30,6 +31,19 @@ const CardsContainer = (props: ProfilePropsType) => {
         },
         onSubmit: (values) => {
             dispatch(getCardsTC(values.text))
+        }
+    })
+
+    const formikUID = useFormik({
+        initialValues: {
+            uid: ''
+        },
+        onSubmit: (values) => {
+            if (values.uid) {
+                dispatch(setUserId(uid))
+            } else {
+                dispatch(setUserId(''))
+            }
         }
     })
 
@@ -85,6 +99,21 @@ const CardsContainer = (props: ProfilePropsType) => {
                                             name="action">Search
                                         <i className="material-icons right">search</i>
                                     </button>
+                                </div>
+                                <div className={"col s2"}>
+                                    <form onChange={formikUID.handleSubmit}>
+                                        <p>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    className="filled-in"
+                                                    name={'uid'}
+                                                    {...formikUID.getFieldProps('uid')}
+                                                />
+                                                <span>My packs</span>
+                                            </label>
+                                        </p>
+                                    </form>
                                 </div>
                             </div>
                         </form>

@@ -16,6 +16,7 @@ let initialState: CardResponseType = {
     max: 20,
     packName: '',
     sortPacks: '0update',
+    user_id: ''
 }
 
 
@@ -30,7 +31,8 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
             return {...state, page: action.currentPage}
         case "cards/SET-PAGE-COUNT":
             return {...state, pageCount: action.count}
-
+        case "cards/SET-USER-ID":
+            return {...state, user_id: action.uid}
         default: {
             return state
         }
@@ -48,15 +50,15 @@ const setRemoveCardPack = (id: string) => {
 }
 export const setCurrentPageAC = (currentPage: number) => ({type: 'cards/SET-CURRENT-PAGE', currentPage} as const)
 export const setCountOnPageAC = (count: number) => ({type: 'cards/SET-PAGE-COUNT', count} as const)
+export const setUserId = (uid: string) => ({type: 'cards/SET-USER-ID', uid} as const)
 
 
 
 // Thunks
-export const getCardsTC = (packName?: string, min: number = 0, max: number = 100, sortPacks: string = '0updates', page: number = 1, pageCount: number = 10, userId?: string) => (dispatch: Dispatch<ActionsType>) => {
+export const getCardsTC = (packName?: string, min: number = 0, max: number = 100, sortPacks: string = '0updates', page: number = 1, pageCount: number = 10, user_id?: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setIsLoadingAC(true))
-    cardApi.getCardPack(packName, min, max, sortPacks, page, pageCount)
+    cardApi.getCardPack(packName, min, max, sortPacks, page, pageCount, user_id)
         .then(res => {
-            console.log(res)
             dispatch(setIsLoadingAC(false))
             dispatch(setCardsAC(res.data))
         })
@@ -130,6 +132,7 @@ export type CardResponseType = {
     min: number,
     max: number,
     sortPacks: string,
+    user_id: string
 
 }
 
@@ -155,4 +158,5 @@ export type ActionsType =
     | ReturnType<typeof setRemoveCardPack>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setCountOnPageAC>
+    | ReturnType<typeof setUserId>
 
