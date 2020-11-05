@@ -41,7 +41,7 @@ const setCardsAC = (cards: CardResponseType) => {
 }
 
 const setRemoveCardPack = (id: string) => {
-    return { type: 'cards/REMOVE-CARD-PACK', id } as const
+    return { type: 'cards/REMOVE-CARD-PACK', id } as const 
 }
 
 export const setCurrentPageAC = (currentPage: number) => ({ type: 'cards/SET-CURRENT-PAGE', currentPage } as const)

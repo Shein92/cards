@@ -11,7 +11,10 @@ const FilterBtn = (props: FilterBtnPropstype) => {
 
 	const dispatch = useDispatch();
 
-	const onClick = () => {
+	const onUpClick = () => {
+
+	}
+	const onDownClick = () => {
 		
 	}
 
