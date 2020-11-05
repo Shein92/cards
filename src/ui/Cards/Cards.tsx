@@ -14,11 +14,11 @@ const Cards = (props: CardsPropsType) => {
     const [isNameOfPackArrowDown, setNameOfPackIsArrowDonw] = useState(false);
     const [isNameOfCreatorArrowDown, setIsNameOfCreatorArrowDonw] = useState(false);
     const [isQuantityOfCardsArrowDown, setIsQuantityOfCardsArrowDonw] = useState(false);
-
-
     useEffect(() => {
-        dispatch(getCardsTC(packName, min, max, '0updates', page, pageCount))
-    }, [page, pageCount, packName, min, max, sortPacks, dispatch])
+        if (props.filterById)
+            dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
+        else dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount))
+    }, [page, pageCount, packName, min, max, sortPacks, props.filterById, dispatch])
 
     const removeHandler = (id: string) => {
         props.removeCardPack(id)
@@ -96,8 +96,10 @@ const Cards = (props: CardsPropsType) => {
             </table>
             {/*Pagination*/}
             <div>
+                {cardPacksTotalCount > pageCount &&
                 <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page}
-                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>
+                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>}
+
             </div>
         </div>
     )
@@ -110,6 +112,7 @@ export default Cards;
 
 type CardsPropsType = {
     cards: Array<CardPacksType>
+    filterById: boolean
     removeCardPack: (id: string) => void
     updateHandler: (id: string, name: string) => void
 }

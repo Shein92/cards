@@ -19,8 +19,10 @@ const CardsContainer = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
+    const uid = useSelector<AppRootStateType, string>(state => state.profile._id)
     const [modalActive, setModalActive] = useState<boolean>(false)
     const [modalUpdateActive, setUpdateModalActive] = useState<boolean>(false)
+    const [filterById, setFilterById] = useState<boolean>(false)
 
     const dispatch = useDispatch()
 
@@ -33,6 +35,7 @@ const CardsContainer = (props: ProfilePropsType) => {
         }
     })
 
+
     const removeCardPack = (id: string) => {
         dispatch(removeCardPackTC(id))
     }
@@ -41,6 +44,10 @@ const CardsContainer = (props: ProfilePropsType) => {
         idPack = id
         namePack = name
         setUpdateModalActive(true)
+    }
+
+    const myPackChangeHandler = (check: boolean) => {
+        setFilterById(check)
     }
 
     useEffect(() => {
@@ -80,18 +87,32 @@ const CardsContainer = (props: ProfilePropsType) => {
                                     />
                                     <label htmlFor="text" className="active"/>
                                 </div>
-                                <div className={"col s4"}>
+                                <div className={"col s3"}>
                                     <button className="btn waves-effect waves-light" type="submit"
                                             name="action">Search
                                         <i className="material-icons right">search</i>
                                     </button>
+                                </div>
+                                <div className={"col s3"}>
+                                    <p>
+                                        <label>
+                                            <input
+                                                onChange={e => myPackChangeHandler(e.target.checked)}
+                                                type="checkbox"
+                                                className="filled-in"
+                                                name={'uid'}
+                                                checked={filterById}
+                                            />
+                                            <span>My packs</span>
+                                        </label>
+                                    </p>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <Cards cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}/>
+                <Cards cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler} filterById={filterById}/>
             </div>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
                 <NewCardPack setModalActive={setModalActive}/>
