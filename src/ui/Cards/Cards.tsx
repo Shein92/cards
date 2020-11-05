@@ -8,12 +8,13 @@ import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurren
 
 const Cards = (props: CardsPropsType) => {
     const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
-    const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks, user_id} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
+    const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
     const dispatch = useDispatch()
-
     useEffect(() => {
-        dispatch(getCardsTC(packName, min, max, '0updates', page, pageCount, user_id))
-    }, [page, pageCount, packName, min, max, sortPacks, user_id, dispatch])
+        if (props.filterById)
+            dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
+        else dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount))
+    }, [page, pageCount, packName, min, max, sortPacks, props.filterById, dispatch])
 
     const removeHandler = (id: string) => {
         props.removeCardPack(id)
@@ -77,8 +78,10 @@ const Cards = (props: CardsPropsType) => {
             </table>
             {/*Pagination*/}
             <div>
+                {cardPacksTotalCount > pageCount &&
                 <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page}
-                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>
+                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>}
+
             </div>
         </div>
     )
@@ -91,6 +94,7 @@ export default Cards;
 
 type CardsPropsType = {
     cards: Array<CardPacksType>
+    filterById: boolean
     removeCardPack: (id: string) => void
     updateHandler: (id: string, name: string) => void
 }

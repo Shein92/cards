@@ -1,9 +1,9 @@
-import { Dispatch } from "redux";
-import { ThunkDispatch } from "redux-thunk"
-import { setIsLoadingAC, setIsLoggedAC } from "./app-reducer";
-import { cardApi } from "../api/cardsAPI";
-import { AddCardPackForm } from "../ui/Cards/NewCardPack/NewCardPack";
-import { AppRootStateType } from "./store";
+import {Dispatch} from "redux";
+import {ThunkDispatch} from "redux-thunk"
+import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
+import {cardApi} from "../api/cardsAPI";
+import {AddCardPackForm} from "../ui/Cards/NewCardPack/NewCardPack";
+import {AppRootStateType} from "./store";
 
 
 let initialState: CardResponseType = {
@@ -11,28 +11,26 @@ let initialState: CardResponseType = {
     cardPacksTotalCount: 0,
     maxCardsCount: 0,
     page: 0,
-    pageCount: 20,
+    pageCount: 10,
     min: 0,
     max: 20,
     packName: '',
-    sortPacks: '0update',
-    user_id: ''
+    sortPacks: '0updated',
+    user_id: '',
 }
 
 
 export const cardsReducer = (state: CardResponseType = initialState, action: ActionsType): CardResponseType => {
     switch (action.type) {
         case 'cards/GET-CARDS':
-            return { ...action.cards }
+            return {...action.cards}
         case 'cards/REMOVE-CARD-PACK':
-            const newState = { ...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id) }
+            const newState = {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
             return newState
         case "cards/SET-CURRENT-PAGE":
             return {...state, page: action.currentPage}
         case "cards/SET-PAGE-COUNT":
             return {...state, pageCount: action.count}
-        case "cards/SET-USER-ID":
-            return {...state, user_id: action.uid}
         default: {
             return state
         }
@@ -42,16 +40,14 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
 
 //Actions Creators
 const setCardsAC = (cards: CardResponseType) => {
-    return { type: 'cards/GET-CARDS', cards } as const
+    return {type: 'cards/GET-CARDS', cards} as const
 }
 
 const setRemoveCardPack = (id: string) => {
-    return { type: 'cards/REMOVE-CARD-PACK', id } as const
+    return {type: 'cards/REMOVE-CARD-PACK', id} as const
 }
 export const setCurrentPageAC = (currentPage: number) => ({type: 'cards/SET-CURRENT-PAGE', currentPage} as const)
 export const setCountOnPageAC = (count: number) => ({type: 'cards/SET-PAGE-COUNT', count} as const)
-export const setUserId = (uid: string) => ({type: 'cards/SET-USER-ID', uid} as const)
-
 
 
 // Thunks
@@ -66,6 +62,7 @@ export const getCardsTC = (packName?: string, min: number = 0, max: number = 100
             dispatch(setIsLoadingAC(false))
         })
 }
+
 
 export const removeCardPackTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setIsLoadingAC(true))
@@ -132,7 +129,7 @@ export type CardResponseType = {
     min: number,
     max: number,
     sortPacks: string,
-    user_id: string
+    user_id: string,
 
 }
 
@@ -158,5 +155,4 @@ export type ActionsType =
     | ReturnType<typeof setRemoveCardPack>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setCountOnPageAC>
-    | ReturnType<typeof setUserId>
 

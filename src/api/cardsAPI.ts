@@ -29,11 +29,7 @@ export const authAPI = {
 }
 export const cardApi = {
     getCardPack(packName: string = '', min: number = 0, max: number = 100, sortPacks: string = '0updates', page: number = 1, pageCount: number = 10, user_id: string = '') {
-        if (user_id !== '')
-            return instatce.get(`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}&user_id=${user_id}`)
-        else
-            return instatce.get(`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}`)
-
+        return instatce.get(`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}&user_id=${user_id}`)
     },
     addCardPack(data: AddCardPackForm) {
         return instatce.post('/cards/pack', {cardsPack: data})

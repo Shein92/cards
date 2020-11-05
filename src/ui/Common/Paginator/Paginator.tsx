@@ -3,7 +3,6 @@ import styles from './Paginator.module.css'
 
 export const Paginator = ({totalItemsCount, pageSize, currentPage, portionsSize, onChangePage, onChangeCountOnPage}: PaginatorPropsType) => {
     const [portionNumber, setPortionNumber] = useState(1)
-    console.log('pagesize', pageSize)
     const pagesCount = Math.ceil(totalItemsCount / pageSize)
     let pages: Array<number> = []
     for (let i = 1; i < pagesCount; i++) {
