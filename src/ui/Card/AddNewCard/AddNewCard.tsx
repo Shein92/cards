@@ -17,7 +17,7 @@ const AddNewCard = (props: AddNewCardPropsType) => {
 			answer: ''
 		},
 		onSubmit: (values) => {
-			dispatch(addNewCardTC(props.packId, values.question, values.question))
+			dispatch(addNewCardTC(props.packId, values.question, values.answer))
 			props.setAddNewCardModal(false);
 			values.answer = '';
 			values.question = ''
