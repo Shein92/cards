@@ -1,0 +1,11 @@
+.div {
+    width: 100%;
+}
+.div li {
+    width: 25px;
+    margin: 15px 15px 15px 15px;
+}
+
+.select {
+    padding-top: 20px;
+}

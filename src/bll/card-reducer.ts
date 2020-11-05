@@ -87,7 +87,7 @@ export const addNewCardTC = (id: string, question?: string, answer?: string) => 
 	}
 }
 
-export const removeCardTC = (id: string) => {
+export const removeCardTC = (id: string) => { 
 	return (dispatch: Dispatch) => {
 		dispatch(setIsLoadingAC(true));
 		getCardAPI.removeCard(id)

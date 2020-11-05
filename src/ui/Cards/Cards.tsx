@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { CardPacksType, CardResponseType, getCardsTC, setCurrentPageAC } from "../../bll/cards-reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { AppRootStateType } from "../../bll/store";
-import { NavLink } from 'react-router-dom';
-import { Paginator } from '../Common/Paginator/Paginator';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../bll/store";
+import {NavLink} from 'react-router-dom';
+import {Paginator} from '../Common/Paginator/Paginator';
+import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/cards-reducer";
 
 
 const Cards = (props: CardsPropsType) => {
@@ -27,6 +27,10 @@ const Cards = (props: CardsPropsType) => {
         dispatch(setCurrentPageAC(currentPage))
     }
 
+    const onChangeCountOnPage = (count: number) => {
+        dispatch(setCountOnPageAC(count))
+    }
+
     const rows = props.cards.map((card) =>
         <tr key={card._id}>
 
@@ -46,7 +50,7 @@ const Cards = (props: CardsPropsType) => {
                             <i className="material-icons">edit</i>
                         </button>
                         <button disabled={userId !== card.user_id} onClick={() => removeHandler(card._id)}
-                            className="btn red waves-effect waves-light" type="submit" name="action">
+                                className="btn red waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">delete_forever</i>
                         </button>
                     </div>
@@ -58,32 +62,23 @@ const Cards = (props: CardsPropsType) => {
         <div>
             <table className={"highlight"}>
                 <thead>
-                    <tr>
-                        <th>Name <span>↓</span></th>
-                        <th>User Name</th>
-                        <th>Cards Count</th>
-                        <th>Rating</th>
-                        <th>Shots</th>
-                        <th>Manage</th>
-                    </tr>
+                <tr>
+                    <th>Name <span>↓</span></th>
+                    <th>User Name</th>
+                    <th>Cards Count</th>
+                    <th>Rating</th>
+                    <th>Shots</th>
+                    <th>Manage</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {rows}
+                {rows}
                 </tbody>
             </table>
             {/*Pagination*/}
             <div>
                 <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page}
-                           portionsSize={10} onChangePage={onChangePage}/>
-                <div className={"pagination"}>
-                    <select className="browser-default">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
+                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>
             </div>
         </div>
     )

@@ -9,7 +9,7 @@ import {NewCardPack} from './NewCardPack/NewCardPack';
 import styles from "./Cards.module.css"
 import {Modal} from "../Common/Modal/Modal";
 import {EditCardPack} from './EditCardPack/EditCardPack';
-import { useFormik } from 'formik';
+import {useFormik} from 'formik';
 
 type ProfilePropsType = any
 let idPack: string
@@ -56,35 +56,41 @@ const CardsContainer = (props: ProfilePropsType) => {
 
         <div className={styles.cards}>
             {isLoading && <Loading/>}
-            <form className="col s12" onSubmit={formik.handleSubmit}>
-                <div className="row">
-                    <div className="input-field col s2">
-                        <input
-                            placeholder={'Text'}
-                            id="text"
-                            name="text"
-                            type="text"
-                            className="validate"
-                            {...formik.getFieldProps('text')}
-                        />
-                        <label htmlFor="text" className="active"/>
-                    </div>
-                    <div>
-                        <button className="btn waves-effect waves-light" type="submit"
-                                name="action">Search
-                            <i className="material-icons right">search</i>
+            <div className={"col s6"}>
+                <h1>CARDS</h1>
+                <div className={"row"}>
+                    <div className={"col s2"}>
+                        <button onClick={() => setModalActive(true)} className="btn waves-effect waves-light"
+                                type="submit"
+                                name="action">New Pack
+                            <i className="material-icons right">add</i>
                         </button>
                     </div>
+                    <div className={"col s6"}>
+                        <form className="col s12" onSubmit={formik.handleSubmit}>
+                            <div className="row">
+                                <div className="col s6">
+                                    <input
+                                        placeholder={'Text'}
+                                        id="text"
+                                        name="text"
+                                        type="text"
+                                        className="validate"
+                                        {...formik.getFieldProps('text')}
+                                    />
+                                    <label htmlFor="text" className="active"/>
+                                </div>
+                                <div className={"col s4"}>
+                                    <button className="btn waves-effect waves-light" type="submit"
+                                            name="action">Search
+                                        <i className="material-icons right">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
-            <div>
-                <div>
-                    <h1>CARDS</h1>
-                    <button onClick={() => setModalActive(true)} className="btn waves-effect waves-light" type="submit"
-                            name="action">New Pack
-                        <i className="material-icons right">add</i>
-                    </button>
-                </div>
+
                 <Cards cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}/>
             </div>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
