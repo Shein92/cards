@@ -3,6 +3,7 @@ export const logout: string = '/logout';
 export const newPass: string = '/newPassword';
 export const profile: string = '/profile';
 export const cards: string = '/cards';
+export const card: string = '/card';
 export const restorePass: string = '/restorePassword';
 export const registration: string = '/registration';
 export const resetPass: string = '/resetPassword'

@@ -27,7 +27,6 @@ export const authAPI = {
         return instatce.delete('/auth/me', {})
     }
 }
-
 export const cardApi = {
     getCardPack(packName: string='', min: number = 0, max: number = 100, sortPacks: string = '0updates', page: number = 1, pageCount: number = 10, userId?: string) {
         return instatce.get(`/cards/pack?packName=${packName}&min=${min}&max=${max}&sortPacks=${sortPacks}&page=${page}&pageCount=${pageCount}`)
