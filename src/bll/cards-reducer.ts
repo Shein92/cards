@@ -1,9 +1,9 @@
-import {Dispatch} from "redux";
-import {ThunkDispatch} from "redux-thunk"
-import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
-import {cardApi} from "../api/cardsAPI";
-import {AddCardPackForm} from "../ui/Cards/NewCardPack/NewCardPack";
-import {AppRootStateType} from "./store";
+import { Dispatch } from "redux";
+import { ThunkDispatch } from "redux-thunk"
+import { setIsLoadingAC, setIsLoggedAC } from "./app-reducer";
+import { cardApi } from "../api/cardsAPI";
+import { AddCardPackForm } from "../ui/Cards/NewCardPack/NewCardPack";
+import { AppRootStateType } from "./store";
 
 
 let initialState: CardResponseType = {
@@ -22,14 +22,15 @@ let initialState: CardResponseType = {
 export const cardsReducer = (state: CardResponseType = initialState, action: ActionsType): CardResponseType => {
     switch (action.type) {
         case 'cards/GET-CARDS':
-            return {...action.cards}
+            return { ...action.cards }
         case 'cards/REMOVE-CARD-PACK':
-            const newState = {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
+            const newState = { ...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id) }
             return newState
         case "cards/SET-CURRENT-PAGE":
             return {...state, page: action.currentPage}
         case "cards/SET-PAGE-COUNT":
             return {...state, pageCount: action.count}
+
         default: {
             return state
         }
@@ -39,15 +40,15 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
 
 //Actions Creators
 const setCardsAC = (cards: CardResponseType) => {
-    return {type: 'cards/GET-CARDS', cards} as const
+    return { type: 'cards/GET-CARDS', cards } as const
 }
 
 const setRemoveCardPack = (id: string) => {
-    return {type: 'cards/REMOVE-CARD-PACK', id} as const
+    return { type: 'cards/REMOVE-CARD-PACK', id } as const
 }
-
 export const setCurrentPageAC = (currentPage: number) => ({type: 'cards/SET-CURRENT-PAGE', currentPage} as const)
 export const setCountOnPageAC = (count: number) => ({type: 'cards/SET-PAGE-COUNT', count} as const)
+
 
 
 // Thunks
@@ -108,6 +109,7 @@ export type CardPacksType = {
     user_id: string,
     user_name: string,
     name: string,
+    cardsCount: number
     path: string,
     grade: number,
     shots: number,
