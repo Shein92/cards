@@ -59,7 +59,7 @@ const Cards = (props: CardsPropsType) => {
             <table className={"highlight"}>
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Name <span>↓</span></th>
                         <th>User Name</th>
                         <th>Cards Count</th>
                         <th>Rating</th>

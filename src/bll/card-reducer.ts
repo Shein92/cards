@@ -102,13 +102,13 @@ export const removeCardTC = (id: string) => {
 	}
 }
 
-export const updateCardNameTC = (id: string, name: string) => {
+export const updateCardNameTC = (id: string, name: string, packId: string) => {
 	return (dispatch: ThunkDispatch<AppRootStateType, {}, ActionsType>) => {
 		dispatch(setIsLoadingAC(true));
 		getCardAPI.updateCard(id, name)
 		.then(res => {
 			dispatch(setIsLoadingAC(false));
-			dispatch(getCardTC(id))
+			dispatch(getCardTC(packId));
 		})
 		.catch(err => {
 			dispatch(setIsLoadingAC(false));

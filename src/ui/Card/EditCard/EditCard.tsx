@@ -1,12 +1,14 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCardNameTC } from '../../../bll/card-reducer';
+import { getCardTC, updateCardNameTC } from '../../../bll/card-reducer';
 
 type EditCardPropsType = {
 	id: string,
 	name: string,
-	setNewCardNameModal: (value: boolean) => void
+	setNewCardNameModal: (value: boolean) => void,
+	packId: string,
+
 }
 
 const EditCard = (props: EditCardPropsType) => {
@@ -18,7 +20,8 @@ const EditCard = (props: EditCardPropsType) => {
 			question: props.name
 		},
 		onSubmit: (values) => {
-			dispatch(updateCardNameTC(values.id, values.question))
+			dispatch(updateCardNameTC(values.id, values.question, props.packId));
+			props.setNewCardNameModal(false);
 		}
 	})
 

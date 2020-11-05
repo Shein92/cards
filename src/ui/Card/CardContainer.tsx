@@ -20,12 +20,12 @@ const CardContainer = (props: CardContainerPropsType) => {
 	const card = useSelector<AppRootStateType, Array<CardType>>(state => state.card.cards);
 	const [addNewCardModal, setAddNewCardModal] = useState(false);
 	const [newCardNameModal,setNewCardNameModal] = useState(false);
-	let { cardId } = useParams();
+	let { packId } = useParams();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getCardTC(cardId));
-		// alert(cardId);
+		dispatch(getCardTC(packId));
+		// alert(packId);
 	}, [])
 
 	if (!isLogged) {
@@ -70,10 +70,10 @@ const CardContainer = (props: CardContainerPropsType) => {
 			</div>
 			<Modal modalActive={addNewCardModal} setModalActive={setAddNewCardModal}>
 				<AddNewCard setAddNewCardModal={setAddNewCardModal}
-				packId={cardId}/>
+				packId={packId}/>
 			</Modal>
 			<Modal modalActive={newCardNameModal} setModalActive={setNewCardNameModal}>
-				{!!idCard && !!cardName && <EditCard id={idCard} name={cardName} setNewCardNameModal={setNewCardNameModal}/>}
+				{!!idCard && !!cardName && <EditCard id={idCard} name={cardName} setNewCardNameModal={setNewCardNameModal} packId={packId}/>}
 			</Modal>
 		</div>
 	)

@@ -7,21 +7,22 @@ const settings = {
 
 const instance = axios.create({
 	baseURL: 'https://neko-back.herokuapp.com/2.0/',
+	// baseURL: 'http://localhost:7542/2.0/',
 	...settings
 });
 
 export const getCardAPI = {
 	getCardsFromPack(packId: string, min: string = '1', max: string = '4', page: string = '1', pageCount: string = '7', cardAnswer: string = 'english', cardQuestion: string = 'english') {
-		return axios.get(`cards/card?cardsPack_id=${packId}`)
+		return instance.get(`cards/card?cardsPack_id=${packId}`)
 	},
 	addCard(packId: string, question?: string, answer?: string) {
-		return axios.post<CardResType>('cards/card', {card: {cardsPack_id: packId, question, answer}})
+		return instance.post<CardResType>('cards/card', {card: {cardsPack_id: packId, question, answer}})
 	},
 	removeCard(cardId: string) {
-		return axios.delete(`cards/card?id=${cardId}`)
+		return instance.delete(`cards/card?id=${cardId}`)
 	},
 	updateCard(cardId: string, question?: string, comments?: string) {
-		return axios.put('cards/card', {card: {
+		return instance.put('cards/card', {card: {
 			_id: cardId,
 			question: question,
 			comments: comments

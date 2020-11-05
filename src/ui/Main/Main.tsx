@@ -23,7 +23,7 @@ const Main = () => {
 				<Route path={resetPass} render={() => <ResetPassContainer/>}/>
 				<Route path={profile} render={() => <ProfileContainer />} />
 				<Route path={cards} render={() => <CardsContainer />} />
-				<Route path={card  + '/:cardId'} render={() => <CardContainer/>}/>
+				<Route path={card  + '/:packId'} render={() => <CardContainer/>}/>
 				<Route path={card} render={() => <CardContainer/>}/>
 				<Route path={registration} render={() => <RegistrationContainer />} />
 				<Route render={() => <PageNotFound/>}/>
