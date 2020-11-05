@@ -11,7 +11,7 @@ let initialState: CardResponseType = {
     cardPacksTotalCount: 0,
     maxCardsCount: 0,
     page: 0,
-    pageCount: 10,
+    pageCount: 20,
     min: 0,
     max: 20,
     packName: '',
@@ -28,6 +28,8 @@ export const cardsReducer = (state: CardResponseType = initialState, action: Act
             return newState
         case "cards/SET-CURRENT-PAGE":
             return {...state, page: action.currentPage}
+        case "cards/SET-PAGE-COUNT":
+            return {...state, pageCount: action.count}
         default: {
             return state
         }
@@ -45,6 +47,7 @@ const setRemoveCardPack = (id: string) => {
 }
 
 export const setCurrentPageAC = (currentPage: number) => ({type: 'cards/SET-CURRENT-PAGE', currentPage} as const)
+export const setCountOnPageAC = (count: number) => ({type: 'cards/SET-PAGE-COUNT', count} as const)
 
 
 // Thunks
@@ -149,4 +152,5 @@ export type ActionsType =
     | ReturnType<typeof setCardsAC>
     | ReturnType<typeof setRemoveCardPack>
     | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setCountOnPageAC>
 
