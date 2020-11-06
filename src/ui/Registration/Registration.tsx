@@ -67,7 +67,7 @@ const Registration = (props: RegistrationPropsType) => {
 
 	return (
 		<div className={style.registration}>
-			{ isLoading && <Loading />}
+			{/* { isLoading && <Loading />} */}
 			<h2>Registration Page</h2>
 			<div className={style.login}>
 				<form onSubmit={formik.handleSubmit}>

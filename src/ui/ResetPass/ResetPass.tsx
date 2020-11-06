@@ -32,7 +32,7 @@ const ResetPass = (props: ResetPassPropsType) => {
 
     return (
         <div>
-            { isLoading && <Loading />}
+            {/* { isLoading && <Loading />} */}
             <h2>Reset password:</h2>
             <div>
                 <Input value={props.value} onChange={onChange}/>
