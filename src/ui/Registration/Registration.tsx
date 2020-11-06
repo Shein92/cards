@@ -103,7 +103,7 @@ const Registration = (props: RegistrationPropsType) => {
 						</div> : null}
 					</div>
 					<div>
-						<button className={buttonStyle.btn}
+						<button className={"btn waves-effect waves-light"}
 							type={'submit'}
 							disabled={formik.values.password !== formik.values.repeatPassword}
 						>Registration

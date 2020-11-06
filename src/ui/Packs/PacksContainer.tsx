@@ -60,11 +60,6 @@ const PacksContainer = (props: ProfilePropsType) => {
         dispatch(setMinMaxValueAC(value))
     }
 
-    // useEffect(() => {
-    //     dispatch(getCardsTC())
-    // }, [])
-
-
     if (!isLogged) {
         return <Redirect to={'/login'}/>
     }

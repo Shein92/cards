@@ -14,7 +14,6 @@ const Packs = (props: CardsPropsType) => {
     const [isNameOfPackArrowDown, setNameOfPackIsArrowDonw] = useState(false);
     const [isNameOfCreatorArrowDown, setIsNameOfCreatorArrowDonw] = useState(false);
     const [isQuantityOfCardsArrowDown, setIsQuantityOfCardsArrowDonw] = useState(false);
-    console.log(cardPacksTotalCount, pageCount, page)
 
     useEffect( () => {
         if (props.filterById)

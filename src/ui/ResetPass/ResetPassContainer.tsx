@@ -57,7 +57,7 @@ const ResetPassContainer = React.memo(() => {
 					{formik.errors.email}
 				</div> : null}
 				<div>
-					<button className={btn.btn} 
+					<button className={"btn waves-effect waves-light"}
 					type={"submit"}>Submit</button>
 				</div>
 			</form>
