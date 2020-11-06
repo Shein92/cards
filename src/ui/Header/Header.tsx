@@ -29,16 +29,6 @@ const Header = () => {
                 </ul>
             </div>
         </nav>
-        // <nav className={style.navigation}>
-        //     {isLogged ? <button onClick={logoutHandler}>Logout</button> : <NavigationLink to={login} title={"Login"}/>}
-        //     {/* <NavigationLink to={newPass} title={"New password"}/> */}
-        //     <NavigationLink to={restorePass} title={"Restore password"}/>
-        //     <NavigationLink to={profile} title={"Profile"}/>
-        //     <NavigationLink to={cards} title={"Cards"}/>
-        //     <NavigationLink to={card} title={"Card"}/>
-        //     <NavigationLink to={resetPass} title={"Reset password"}/>
-        //     <NavigationLink to={registration} title={"Registration"}/>
-        // </nav>
     )
 }
 

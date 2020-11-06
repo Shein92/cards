@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {LoginParamsType} from "../bll/login-reducer";
-import {AddCardPackForm} from "../ui/Cards/NewPack/NewPack";
-import {EditCardPackType} from "../ui/Cards/EditPack/EditPack";
+import {AddCardPackForm} from "../ui/Packs/NewPack/NewPack";
+import {EditCardPackType} from "../ui/Packs/EditPack/EditPack";
 import {UpdateCardPackType} from "../bll/cards-reducer";
 
 

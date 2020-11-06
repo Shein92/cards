@@ -2,7 +2,7 @@ import {Dispatch} from "redux";
 import {ThunkDispatch} from "redux-thunk"
 import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
 import {cardApi} from "../api/cardsAPI";
-import {AddCardPackForm} from "../ui/Cards/NewPack/NewPack";
+import {AddCardPackForm} from "../ui/Packs/NewPack/NewPack";
 import {AppRootStateType} from "./store";
 
 
