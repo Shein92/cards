@@ -60,7 +60,7 @@ const Login = React.memo((props: LoginPropType) => {
 
     return (
         <div className={style.login}>
-            {isLoading && <Loading/>}
+            {/* {isLoading && <Loading/>} */}
             <h2>Login Page</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div>

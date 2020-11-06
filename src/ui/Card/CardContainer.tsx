@@ -59,7 +59,7 @@ const CardContainer = (props: CardContainerPropsType) => {
 
 	return (
 		<div>
-			{isLoading && <Loading />}
+			{/* {isLoading && <Loading />} */}
 			<div>
 				<h1>Card</h1>
 				<button onClick={() => setAddNewCardModal(true)}

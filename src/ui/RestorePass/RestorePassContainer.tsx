@@ -58,7 +58,7 @@ const RestorePassContainer = React.memo(() => {
 
 	return (
 		<div className={style.restorePass} style={{ textAlign: 'center' }}>
-			{ isLoading && <Loading />}
+			{/* { isLoading && <Loading />} */}
 			<form onSubmit={formik.handleSubmit}>
 				<div>
 					<div>

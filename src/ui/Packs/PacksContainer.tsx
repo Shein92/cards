@@ -66,7 +66,7 @@ const PacksContainer = (props: ProfilePropsType) => {
 
     return (
         <div>
-            {isLoading && <Loading/>}
+            {/* {isLoading && <Loading/>} */}
             <div className={styles.cards}>
                 <div className={"col s6"}>
                     <h1>Packs</h1>
