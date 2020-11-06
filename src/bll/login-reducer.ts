@@ -1,7 +1,7 @@
 import {authAPI} from "../api/cardsAPI";
 import {Dispatch} from "redux";
 import {setupProfileAC} from "./profile-reducer";
-import {setIsLoadingAC, setIsLoggedAC} from "./app-reducer";
+import {setIsLoadingAC, setIsLoggedAC, setIsRequestAuthMeAC} from "./app-reducer";
 
 let initialState: LoginStateType = {
     isLogged: false,
@@ -33,6 +33,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
             dispatch(setIsLoadingAC(false))
             dispatch(setupProfileAC(res.data))
             dispatch(setIsLoggedAC(true))
+            dispatch(setIsRequestAuthMeAC(true))
         })
         .catch(e => {
             dispatch(setIsLoadingAC(false))
@@ -46,6 +47,7 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
         .then(res => {
             dispatch(setIsLoadingAC(false))
             dispatch(setIsLoggedAC(false))
+            dispatch(setIsRequestAuthMeAC(false))
         })
         .catch(e => {
             dispatch(setIsLoadingAC(false))
@@ -66,6 +68,7 @@ export type ActionsType =
     | ReturnType<typeof setIsLoggedAC>
     | ReturnType<typeof setErrorLoginAC>
     | ReturnType<typeof setupProfileAC>
+    | ReturnType<typeof setIsRequestAuthMeAC>
     | ReturnType<typeof setIsLoadingAC>;
 
 export type LoginParamsType = {

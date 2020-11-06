@@ -19,7 +19,7 @@ const Button = (props: ButtonPropsType) => {
 	return (
 		<button onClick={onClick}
 			onSubmit={props.onSubmit}
-			className={style.btn}
+			className={"btn waves-effect waves-light"}
 			type={props.type}
 		>{props.text}</button>
 	)
