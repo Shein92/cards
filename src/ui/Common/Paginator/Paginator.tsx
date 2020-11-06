@@ -26,7 +26,7 @@ export const Paginator = ({totalItemsCount, pageSize, currentPage, portionsSize,
                             .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                             .map(p => {
                                 return <li onClick={() => onChangePage(p)} key={p}
-                                           className={currentPage === p ? "active" : "waves-effect"}>{p}</li>
+                                           className={currentPage === p ? "active teal lighten-1" : "waves-effect"}>{p}</li>
                             })
                         }
                         {portionsCount > portionNumber &&
