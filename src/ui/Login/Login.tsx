@@ -90,7 +90,7 @@ const Login = React.memo((props: LoginPropType) => {
 					/>
 				</div>
 				<div>
-					<button className={buttonStyle.btn}
+					<button className={"btn waves-effect waves-light"}
 						type={'submit'}
 						disabled={isLoading}
 					>Login
