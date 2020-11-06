@@ -14,6 +14,8 @@ const Cards = (props: CardsPropsType) => {
     const [isNameOfPackArrowDown, setNameOfPackIsArrowDonw] = useState(false);
     const [isNameOfCreatorArrowDown, setIsNameOfCreatorArrowDonw] = useState(false);
     const [isQuantityOfCardsArrowDown, setIsQuantityOfCardsArrowDonw] = useState(false);
+    console.log(cardPacksTotalCount, pageCount, page)
+
     useEffect( () => {
         if (props.filterById)
             dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
@@ -97,7 +99,8 @@ const Cards = (props: CardsPropsType) => {
             <div>
                 {cardPacksTotalCount > pageCount &&
                 <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page}
-                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>}
+                           portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>
+                           }
 
             </div>
         </div>

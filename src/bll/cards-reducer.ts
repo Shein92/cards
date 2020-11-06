@@ -24,7 +24,7 @@ let initialState: CardResponseType = {
 export const cardsReducer = (state: CardResponseType = initialState, action: ActionsType): CardResponseType => {
     switch (action.type) {
         case 'cards/GET-CARDS':
-            return {...state, cardPacks: action.cards.cardPacks}
+            return {...state, ...action.cards}
         case 'cards/REMOVE-CARD-PACK':
             const newState = {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.id)}
             return newState
