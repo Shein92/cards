@@ -1,7 +1,6 @@
 import React from 'react';
 import NavigationLink from '../Common/NavigationLink/NavigationLink';
-import {login, logout, newPass, profile, registration, resetPass, restorePass, cards, card} from '../Routes/routes';
-import style from './Header.module.css';
+import {card, login, packs, profile, registration, resetPass, restorePass} from '../Routes/routes';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {logoutTC} from "../../bll/login-reducer";
@@ -23,7 +22,7 @@ const Header = () => {
                         <NavigationLink to={login} title={"Login"}/>}</li>
                     <li><NavigationLink to={restorePass} title={"Restore password"}/></li>
                     <li><NavigationLink to={profile} title={"Profile"}/></li>
-                    <li><NavigationLink to={cards} title={"Cards"}/></li>
+                    <li><NavigationLink to={packs} title={"Packs"}/></li>
                     <li><NavigationLink to={card} title={"Card"}/></li>
                     <li><NavigationLink to={resetPass} title={"Reset password"}/></li>
                     <li><NavigationLink to={registration} title={"Registration"}/></li>

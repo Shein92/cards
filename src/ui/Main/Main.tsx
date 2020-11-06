@@ -8,8 +8,8 @@ import ProfileContainer from '../Profile/ProfileContainer';
 import RegistrationContainer from '../Registration/RegistrationContainer';
 import ResetPassContainer from '../ResetPass/ResetPassContainer';
 import RestorePassContainer from '../RestorePass/RestorePassContainer';
-import {card, cards, login, newPass, profile, registration, resetPass, restorePass} from '../Routes/routes';
-import CardsContainer from "../Cards/CardsContainer";
+import {card, packs, login, newPass, profile, registration, resetPass, restorePass} from '../Routes/routes';
+import PacksContainer from "../Cards/PacksContainer";
 import CardContainer from '../Card/CardContainer';
 
 const Main = () => {
@@ -22,7 +22,7 @@ const Main = () => {
 				<Route path={restorePass + '/:token'} render={() => <RestorePassContainer />} />
 				<Route path={resetPass} render={() => <ResetPassContainer/>}/>
 				<Route path={profile} render={() => <ProfileContainer />} />
-				<Route path={cards} render={() => <CardsContainer />} />
+				<Route path={packs} render={() => <PacksContainer />} />
 				<Route path={card  + '/:packId'} render={() => <CardContainer/>}/>
 				<Route path={card} render={() => <CardContainer/>}/>
 				<Route path={registration} render={() => <RegistrationContainer />} />

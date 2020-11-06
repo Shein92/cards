@@ -7,7 +7,7 @@ import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurren
 import FilterBtn from '../Common/FilterBtn/FilterBtn';
 
 
-const Cards = (props: CardsPropsType) => {
+const Packs = (props: CardsPropsType) => {
     const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
     const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
     const dispatch = useDispatch()
@@ -107,7 +107,7 @@ const Cards = (props: CardsPropsType) => {
     )
 }
 
-export default Cards;
+export default Packs;
 
 
 // types

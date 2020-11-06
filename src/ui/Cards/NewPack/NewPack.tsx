@@ -12,7 +12,7 @@ type NewCardPackPropsType = {
     setModalActive: (value: boolean) => void
 }
 
-export const NewCardPack = ({setModalActive}: NewCardPackPropsType) => {
+export const NewPack = ({setModalActive}: NewCardPackPropsType) => {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {

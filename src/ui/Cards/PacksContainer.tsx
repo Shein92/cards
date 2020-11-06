@@ -6,18 +6,18 @@ import {Range} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import {Loading} from "../Common/Loading/Loading";
 import {CardPacksType, getCardsTC, removeCardPackTC, setMinMaxValueAC} from "../../bll/cards-reducer";
-import Cards from "./Cards";
-import {NewCardPack} from './NewCardPack/NewCardPack';
-import styles from "./Cards.module.css"
+import Packs from "./Packs";
+import {NewPack} from './NewPack/NewPack';
+import styles from "./Packs.module.css"
 import {Modal} from "../Common/Modal/Modal";
-import {EditCardPack} from './EditCardPack/EditCardPack';
+import {EditPack} from './EditPack/EditPack';
 import {useFormik} from 'formik';
 
 type ProfilePropsType = any
 let idPack: string
 let namePack: string
 
-const CardsContainer = (props: ProfilePropsType) => {
+const PacksContainer = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
@@ -74,7 +74,7 @@ const CardsContainer = (props: ProfilePropsType) => {
         <div className={styles.cards}>
             {isLoading && <Loading/>}
             <div className={"col s6"}>
-                <h1>CARDS</h1>
+                <h1>Packs</h1>
                 <div className={"row"}>
                     <div className={"col s2"}>
                         <button onClick={() => setModalActive(true)} className="btn waves-effect waves-light"
@@ -134,17 +134,17 @@ const CardsContainer = (props: ProfilePropsType) => {
 
                 </div>
 
-                <Cards cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}
+                <Packs cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}
                        filterById={filterById}/>
             </div>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
-                <NewCardPack setModalActive={setModalActive}/>
+                <NewPack setModalActive={setModalActive}/>
             </Modal>
             <Modal modalActive={modalUpdateActive} setModalActive={setUpdateModalActive}>
-                {idPack && <EditCardPack id={idPack} name={namePack} setUpdateModalActive={setUpdateModalActive}/>}
+                {idPack && <EditPack id={idPack} name={namePack} setUpdateModalActive={setUpdateModalActive}/>}
             </Modal>
         </div>
     )
 }
 
-export default CardsContainer;
+export default PacksContainer;
