@@ -18,7 +18,9 @@ const Header = () => {
         <nav>
             <div className="nav-wrapper teal lighten-1">
                 <ul id="nav-mobile" className="left hide-on-med-and-down  teal lighten-1">
-                   <li>{isLogged ? <button onClick={logoutHandler}>Logout</button> : <NavigationLink to={login} title={"Login"}/>}</li>
+                    <li>{isLogged ?
+                        <button className={"btn btn-flat teal lighten-1"} onClick={logoutHandler}>Logout</button> :
+                        <NavigationLink to={login} title={"Login"}/>}</li>
                     <li><NavigationLink to={restorePass} title={"Restore password"}/></li>
                     <li><NavigationLink to={profile} title={"Profile"}/></li>
                     <li><NavigationLink to={cards} title={"Cards"}/></li>
