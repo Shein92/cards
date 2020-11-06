@@ -65,80 +65,82 @@ const PacksContainer = (props: ProfilePropsType) => {
     }
 
     return (
-
-        <div className={styles.cards}>
+        <div>
             {isLoading && <Loading/>}
-            <div className={"col s6"}>
-                <h1>Packs</h1>
-                <div className={"row"}>
-                    <div className={"col s2"}>
-                        <button onClick={() => setModalActive(true)} className="btn waves-effect waves-light"
-                                type="submit"
-                                name="action">New Pack
-                            <i className="material-icons right">add</i>
-                        </button>
-                    </div>
-                    <div className={"col s4"}>
-                        <form className="col s12" onSubmit={formik.handleSubmit}>
-                            <div className="row">
-                                <div className="col s9">
+            <div className={styles.cards}>
+                <div className={"col s6"}>
+                    <h1>Packs</h1>
+                    <div className={"row"}>
+                        <div className={"col s2"}>
+                            <button onClick={() => setModalActive(true)} className="btn waves-effect waves-light"
+                                    type="submit"
+                                    name="action">New Pack
+                                <i className="material-icons right">add</i>
+                            </button>
+                        </div>
+                        <div className={"col s4"}>
+                            <form className="col s12" onSubmit={formik.handleSubmit}>
+                                <div className="row">
+                                    <div className="col s9">
+                                        <input
+                                            placeholder={'Text'}
+                                            id="text"
+                                            name="text"
+                                            type="text"
+                                            className="validate"
+                                            {...formik.getFieldProps('text')}
+                                        />
+                                        <label htmlFor="text" className="active"/>
+                                    </div>
+                                    <div className={"col s2"}>
+                                        <button className="btn waves-effect waves-light" type="submit"
+                                                name="action">Search
+                                            <i className="material-icons right">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div className={"col s1"}>
+                            <p>
+                                <label>
                                     <input
-                                        placeholder={'Text'}
-                                        id="text"
-                                        name="text"
-                                        type="text"
-                                        className="validate"
-                                        {...formik.getFieldProps('text')}
+                                        onChange={e => myPackChangeHandler(e.target.checked)}
+                                        type="checkbox"
+                                        className="filled-in"
+                                        name={'uid'}
+                                        checked={filterById}
                                     />
-                                    <label htmlFor="text" className="active"/>
-                                </div>
-                                <div className={"col s2"}>
-                                    <button className="btn waves-effect waves-light" type="submit"
-                                            name="action">Search
-                                        <i className="material-icons right">search</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className={"col s1"}>
-                        <p>
-                            <label>
-                                <input
-                                    onChange={e => myPackChangeHandler(e.target.checked)}
-                                    type="checkbox"
-                                    className="filled-in"
-                                    name={'uid'}
-                                    checked={filterById}
-                                />
-                                <span>My packs</span>
-                            </label>
-                        </p>
-                    </div>
-                    <div className={"col s3"}>
-                        <span>From {value[0]} to {value[1]}</span>
-                        <Range min={0} max={20} defaultValue={value} pushable={true} step={1}
-                               onChange={onChangeRange}/>
-                    </div>
-                    <div className={"col s2"}>
-                        <button onClick={rangeHandler} className="btn waves-effect waves-light"
-                        >Apply
-                            <i className="material-icons right">done</i>
-                        </button>
+                                    <span>My packs</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div className={"col s3"}>
+                            <span>From {value[0]} to {value[1]}</span>
+                            <Range min={0} max={20} defaultValue={value} pushable={true} step={1}
+                                   onChange={onChangeRange}/>
+                        </div>
+                        <div className={"col s2"}>
+                            <button onClick={rangeHandler} className="btn waves-effect waves-light"
+                            >Apply
+                                <i className="material-icons right">done</i>
+                            </button>
+                        </div>
+
                     </div>
 
+                    <Packs cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}
+                           filterById={filterById}/>
                 </div>
-
-                <Packs cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}
-                       filterById={filterById}/>
+                <Modal modalActive={modalActive} setModalActive={setModalActive}>
+                    <NewPack setModalActive={setModalActive}/>
+                </Modal>
+                <Modal modalActive={modalUpdateActive} setModalActive={setUpdateModalActive}>
+                    {idPack && <EditPack id={idPack} name={namePack} setUpdateModalActive={setUpdateModalActive}/>}
+                </Modal>
             </div>
-            <Modal modalActive={modalActive} setModalActive={setModalActive}>
-                <NewPack setModalActive={setModalActive}/>
-            </Modal>
-            <Modal modalActive={modalUpdateActive} setModalActive={setUpdateModalActive}>
-                {idPack && <EditPack id={idPack} name={namePack} setUpdateModalActive={setUpdateModalActive}/>}
-            </Modal>
         </div>
+
     )
 }
 
