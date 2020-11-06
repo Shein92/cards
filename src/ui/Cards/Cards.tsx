@@ -14,12 +14,11 @@ const Cards = (props: CardsPropsType) => {
     const [isNameOfPackArrowDown, setNameOfPackIsArrowDonw] = useState(false);
     const [isNameOfCreatorArrowDown, setIsNameOfCreatorArrowDonw] = useState(false);
     const [isQuantityOfCardsArrowDown, setIsQuantityOfCardsArrowDonw] = useState(false);
-    useEffect(() => {
+    useEffect( () => {
         if (props.filterById)
             dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
         else dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount))
     }, [page, pageCount, packName, min, max, sortPacks, props.filterById, dispatch])
-
     const removeHandler = (id: string) => {
         props.removeCardPack(id)
     }
@@ -46,7 +45,7 @@ const Cards = (props: CardsPropsType) => {
             <td>{card.rating}</td>
             <td>{card.shots}</td>
             <td>
-                <div> 
+                <div>
                     <div>
                         <button style={{marginRight: '5px'}} disabled={userId !== card.user_id}
                                 onClick={() => updateHandler(card._id, card.name)}

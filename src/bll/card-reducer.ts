@@ -55,6 +55,7 @@ export const removeCardAC = (cardId: string) => {
 	return { type: 'card/REMOVE-CARD', cardId } as const
 }
 
+
 //Thunks
 
 export const getCardTC = (cardId: string, min: string = '1', max: string = '4', page: string = '1', pageCount: string = '7', cardAnswer: string = 'english', cardQuestion: string = 'english') => {
@@ -87,7 +88,7 @@ export const addNewCardTC = (id: string, question?: string, answer?: string) => 
 	}
 }
 
-export const removeCardTC = (id: string) => { 
+export const removeCardTC = (id: string) => {
 	return (dispatch: Dispatch) => {
 		dispatch(setIsLoadingAC(true));
 		getCardAPI.removeCard(id)
