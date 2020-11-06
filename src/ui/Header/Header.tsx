@@ -15,16 +15,29 @@ const Header = () => {
         dispatch(logoutTC())
     }
     return (
-        <nav className={style.navigation}>
-            {isLogged ? <button onClick={logoutHandler}>Logout</button> : <NavigationLink to={login} title={"Login"}/>}
-            {/* <NavigationLink to={newPass} title={"New password"}/> */}
-            <NavigationLink to={restorePass} title={"Restore password"}/>
-            <NavigationLink to={profile} title={"Profile"}/>
-            <NavigationLink to={cards} title={"Cards"}/>
-            <NavigationLink to={card} title={"Card"}/>
-            <NavigationLink to={resetPass} title={"Reset password"}/>
-            <NavigationLink to={registration} title={"Registration"}/>
+        <nav>
+            <div className="nav-wrapper teal lighten-1">
+                <ul id="nav-mobile" className="left hide-on-med-and-down  teal lighten-1">
+                   <li>{isLogged ? <button onClick={logoutHandler}>Logout</button> : <NavigationLink to={login} title={"Login"}/>}</li>
+                    <li><NavigationLink to={restorePass} title={"Restore password"}/></li>
+                    <li><NavigationLink to={profile} title={"Profile"}/></li>
+                    <li><NavigationLink to={cards} title={"Cards"}/></li>
+                    <li><NavigationLink to={card} title={"Card"}/></li>
+                    <li><NavigationLink to={resetPass} title={"Reset password"}/></li>
+                    <li><NavigationLink to={registration} title={"Registration"}/></li>
+                </ul>
+            </div>
         </nav>
+        // <nav className={style.navigation}>
+        //     {isLogged ? <button onClick={logoutHandler}>Logout</button> : <NavigationLink to={login} title={"Login"}/>}
+        //     {/* <NavigationLink to={newPass} title={"New password"}/> */}
+        //     <NavigationLink to={restorePass} title={"Restore password"}/>
+        //     <NavigationLink to={profile} title={"Profile"}/>
+        //     <NavigationLink to={cards} title={"Cards"}/>
+        //     <NavigationLink to={card} title={"Card"}/>
+        //     <NavigationLink to={resetPass} title={"Reset password"}/>
+        //     <NavigationLink to={registration} title={"Registration"}/>
+        // </nav>
     )
 }
 
