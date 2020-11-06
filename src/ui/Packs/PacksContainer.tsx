@@ -68,7 +68,7 @@ const PacksContainer = (props: ProfilePropsType) => {
         <div>
             {/* {isLoading && <Loading/>} */}
             <div className={styles.cards}>
-                <div className={"col s6"}>
+                <div className={"col s6"} style={{overflow: "hidden"}}>
                     <h1>Packs</h1>
                     <div className={"row"}>
                         <div className={"col s2"}>
