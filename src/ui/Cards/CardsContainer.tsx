@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {Redirect} from 'react-router-dom';
+import {Range} from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import {Loading} from "../Common/Loading/Loading";
-import {CardPacksType, getCardsTC, removeCardPackTC} from "../../bll/cards-reducer";
+import {CardPacksType, getCardsTC, removeCardPackTC, setMinMaxValueAC} from "../../bll/cards-reducer";
 import Cards from "./Cards";
 import {NewCardPack} from './NewCardPack/NewCardPack';
 import styles from "./Cards.module.css"
@@ -19,11 +21,10 @@ const CardsContainer = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
-    const uid = useSelector<AppRootStateType, string>(state => state.profile._id)
     const [modalActive, setModalActive] = useState<boolean>(false)
     const [modalUpdateActive, setUpdateModalActive] = useState<boolean>(false)
     const [filterById, setFilterById] = useState<boolean>(false)
-
+    const [value, setValue] = useState<Array<number>>([0, 20])
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -50,9 +51,18 @@ const CardsContainer = (props: ProfilePropsType) => {
         setFilterById(check)
     }
 
-    useEffect(() => {
-        dispatch(getCardsTC())
-    }, [])
+    const onChangeRange = (value: Array<number>) => {
+        setValue(value)
+
+    }
+
+    const rangeHandler = () => {
+        dispatch(setMinMaxValueAC(value))
+    }
+
+    // useEffect(() => {
+    //     dispatch(getCardsTC())
+    // }, [])
 
 
     if (!isLogged) {
@@ -73,10 +83,10 @@ const CardsContainer = (props: ProfilePropsType) => {
                             <i className="material-icons right">add</i>
                         </button>
                     </div>
-                    <div className={"col s6"}>
+                    <div className={"col s4"}>
                         <form className="col s12" onSubmit={formik.handleSubmit}>
                             <div className="row">
-                                <div className="col s6">
+                                <div className="col s9">
                                     <input
                                         placeholder={'Text'}
                                         id="text"
@@ -87,32 +97,45 @@ const CardsContainer = (props: ProfilePropsType) => {
                                     />
                                     <label htmlFor="text" className="active"/>
                                 </div>
-                                <div className={"col s3"}>
+                                <div className={"col s2"}>
                                     <button className="btn waves-effect waves-light" type="submit"
                                             name="action">Search
                                         <i className="material-icons right">search</i>
                                     </button>
                                 </div>
-                                <div className={"col s3"}>
-                                    <p>
-                                        <label>
-                                            <input
-                                                onChange={e => myPackChangeHandler(e.target.checked)}
-                                                type="checkbox"
-                                                className="filled-in"
-                                                name={'uid'}
-                                                checked={filterById}
-                                            />
-                                            <span>My packs</span>
-                                        </label>
-                                    </p>
-                                </div>
                             </div>
                         </form>
                     </div>
+                    <div className={"col s1"}>
+                        <p>
+                            <label>
+                                <input
+                                    onChange={e => myPackChangeHandler(e.target.checked)}
+                                    type="checkbox"
+                                    className="filled-in"
+                                    name={'uid'}
+                                    checked={filterById}
+                                />
+                                <span>My packs</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div className={"col s3"}>
+                        <span>From {value[0]} to {value[1]}</span>
+                        <Range min={0} max={20} defaultValue={value} pushable={true} step={1}
+                               onChange={onChangeRange}/>
+                    </div>
+                    <div className={"col s2"}>
+                        <button onClick={rangeHandler} className="btn waves-effect waves-light"
+                        >Apply
+                            <i className="material-icons right">done</i>
+                        </button>
+                    </div>
+
                 </div>
 
-                <Cards cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler} filterById={filterById}/>
+                <Cards cards={cards} removeCardPack={removeCardPack} updateHandler={updateHandler}
+                       filterById={filterById}/>
             </div>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
                 <NewCardPack setModalActive={setModalActive}/>
