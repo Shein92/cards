@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {Redirect} from 'react-router-dom';
@@ -24,8 +24,11 @@ const PacksContainer = (props: ProfilePropsType) => {
     const [modalActive, setModalActive] = useState<boolean>(false)
     const [modalUpdateActive, setUpdateModalActive] = useState<boolean>(false)
     const [filterById, setFilterById] = useState<boolean>(false)
-    const [value, setValue] = useState<Array<number>>([0, maxCardsCount])
+    const [value, setValue] = useState<Array<number>>([0, 0])
     const dispatch = useDispatch()
+    useEffect(() => {
+        setValue([0, maxCardsCount])
+    }, [maxCardsCount, setValue])
 
     const formik = useFormik({
         initialValues: {
@@ -35,6 +38,7 @@ const PacksContainer = (props: ProfilePropsType) => {
             dispatch(getCardsTC(values.text))
         }
     })
+
 
 
     const removeCardPack = (id: string) => {
@@ -117,7 +121,7 @@ const PacksContainer = (props: ProfilePropsType) => {
                         </div>
                         <div className={"col s3"}>
                             <span>From {value[0]} to {value[1]}</span>
-                            <Range min={0} max={maxCardsCount} defaultValue={value} pushable={true} step={1}
+                            <Range min={0} max={value[1]} value={value} pushable={true} step={1}
                                    onChange={onChangeRange}/>
                         </div>
                         <div className={"col s2"}>
