@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {Redirect} from 'react-router-dom';
 import {Range} from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import {Loading} from "../Common/Loading/Loading";
-import {CardPacksType, getCardsTC, removeCardPackTC, setMinMaxValueAC} from "../../bll/cards-reducer";
+import {CardPacksType, getCardsTC, removeCardPackTC, setMinMaxValueAC} from "../../bll/packs-reducer";
 import Packs from "./Packs";
 import {NewPack} from './NewPack/NewPack';
 import styles from "./Packs.module.css"
@@ -21,10 +20,11 @@ const PacksContainer = (props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
+    const maxCardsCount = useSelector<AppRootStateType, number>(state => state.cards.maxCardsCount)
     const [modalActive, setModalActive] = useState<boolean>(false)
     const [modalUpdateActive, setUpdateModalActive] = useState<boolean>(false)
     const [filterById, setFilterById] = useState<boolean>(false)
-    const [value, setValue] = useState<Array<number>>([0, 20])
+    const [value, setValue] = useState<Array<number>>([0, maxCardsCount])
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -117,7 +117,7 @@ const PacksContainer = (props: ProfilePropsType) => {
                         </div>
                         <div className={"col s3"}>
                             <span>From {value[0]} to {value[1]}</span>
-                            <Range min={0} max={20} defaultValue={value} pushable={true} step={1}
+                            <Range min={0} max={maxCardsCount} defaultValue={value} pushable={true} step={1}
                                    onChange={onChangeRange}/>
                         </div>
                         <div className={"col s2"}>

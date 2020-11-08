@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getCardsTC } from '../../../bll/cards-reducer';
+import { getCardsTC } from '../../../bll/packs-reducer';
 
 type FilterBtnPropstype = {
 	filterUp: string,
@@ -8,11 +8,11 @@ type FilterBtnPropstype = {
 	packId?: string,
 	isArrowDown: boolean,
 	setIsArrowDown: (value: boolean) => void,
-	packName?: string, 
-	min?: number, 
-	max?: number, 
+	packName?: string,
+	min?: number,
+	max?: number,
 	page?: number,
-	pageCount?: number, 
+	pageCount?: number,
 	userId?: string
 }
 

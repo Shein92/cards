@@ -1,7 +1,7 @@
 import React from "react";
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
-import {updateCardPackTC} from "../../../bll/cards-reducer";
+import {updateCardPackTC} from "../../../bll/packs-reducer";
 
 export const EditPack = ({id, name, setUpdateModalActive}: EditCardPackType) => {
     const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {NavLink} from 'react-router-dom';
 import {Paginator} from '../Common/Paginator/Paginator';
-import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/cards-reducer";
+import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/packs-reducer";
 import FilterBtn from '../Common/FilterBtn/FilterBtn';
 import {Modal} from "../Common/Modal/Modal";
 

@@ -21,7 +21,7 @@ let initialState: CardResponseType = {
 }
 
 
-export const cardsReducer = (state: CardResponseType = initialState, action: ActionsType): CardResponseType => {
+export const packsReducer = (state: CardResponseType = initialState, action: ActionsType): CardResponseType => {
     switch (action.type) {
         case 'cards/GET-CARDS':
             return {...state, ...action.cards}

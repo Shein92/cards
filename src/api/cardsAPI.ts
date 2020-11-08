@@ -2,7 +2,7 @@ import axios from 'axios'
 import {LoginParamsType} from "../bll/login-reducer";
 import {AddCardPackForm} from "../ui/Packs/NewPack/NewPack";
 import {EditCardPackType} from "../ui/Packs/EditPack/EditPack";
-import {UpdateCardPackType} from "../bll/cards-reducer";
+import {UpdateCardPackType} from "../bll/packs-reducer";
 
 
 const settings = {

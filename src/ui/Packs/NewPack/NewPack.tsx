@@ -1,6 +1,6 @@
 import React from "react";
 import {useFormik} from "formik";
-import {addCardPackTC} from "../../../bll/cards-reducer";
+import {addCardPackTC} from "../../../bll/packs-reducer";
 import {useDispatch} from "react-redux";
 
 export type AddCardPackForm = {
