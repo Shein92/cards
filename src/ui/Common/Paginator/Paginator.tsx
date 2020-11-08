@@ -35,7 +35,6 @@ export const Paginator = ({totalItemsCount, pageSize, currentPage, portionsSize,
                     </ul>
                 </div>
             </div>
-
             <div className={"col s1"}>
                 <div className={styles.select}>
                     <select className="browser-default" onChange={e => onChangeCountOnPage(+e.target.value)}>
