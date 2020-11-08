@@ -5,7 +5,10 @@ import {NavLink} from 'react-router-dom';
 import {Paginator} from '../Common/Paginator/Paginator';
 import {CardPacksType, CardResponseType, getCardsTC, setCountOnPageAC, setCurrentPageAC} from "../../bll/cards-reducer";
 import FilterBtn from '../Common/FilterBtn/FilterBtn';
+import {Modal} from "../Common/Modal/Modal";
 
+
+let PackId: string
 
 const Packs = (props: CardsPropsType) => {
     const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
@@ -14,14 +17,24 @@ const Packs = (props: CardsPropsType) => {
     const [isNameOfPackArrowDown, setNameOfPackIsArrowDonw] = useState(false);
     const [isNameOfCreatorArrowDown, setIsNameOfCreatorArrowDonw] = useState(false);
     const [isQuantityOfCardsArrowDown, setIsQuantityOfCardsArrowDonw] = useState(false);
+    const [showRemoveModal, setShowRemoveModal] = useState<boolean>(false)
 
-    useEffect( () => {
+    useEffect(() => {
         if (props.filterById)
             dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
         else dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount))
     }, [page, pageCount, packName, min, max, sortPacks, props.filterById, dispatch])
-    const removeHandler = (id: string) => {
-        props.removeCardPack(id)
+    const removeHandlerModal = (id: string) => {
+        setShowRemoveModal(true)
+        PackId = id
+    }
+
+    const removeHandler = () => {
+        if (PackId) {
+            props.removeCardPack(PackId)
+            setShowRemoveModal(false)
+            PackId = ''
+        }
     }
 
     const updateHandler = (id: string, name: string) => {
@@ -53,7 +66,7 @@ const Packs = (props: CardsPropsType) => {
                                 className="btn waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">edit</i>
                         </button>
-                        <button disabled={userId !== card.user_id} onClick={() => removeHandler(card._id)}
+                        <button disabled={userId !== card.user_id} onClick={() => removeHandlerModal(card._id)}
                                 className="btn red waves-effect waves-light" type="submit" name="action">
                             <i className="material-icons">delete_forever</i>
                         </button>
@@ -67,23 +80,28 @@ const Packs = (props: CardsPropsType) => {
             <table className={"highlight"}>
                 <thead>
                 <tr>
-                    <th>Name <FilterBtn filterDown={'0name'} filterUp={'1name'} isArrowDown={isNameOfPackArrowDown} setIsArrowDown={setNameOfPackIsArrowDonw}
-                    max={max}
-                    min={min}
-                    page={page}
-                    pageCount={pageCount}
+                    <th>Name <FilterBtn filterDown={'0name'} filterUp={'1name'} isArrowDown={isNameOfPackArrowDown}
+                                        setIsArrowDown={setNameOfPackIsArrowDonw}
+                                        max={max}
+                                        min={min}
+                                        page={page}
+                                        pageCount={pageCount}
                     /></th>
-                    <th>User Name <FilterBtn filterDown={'0user_name'} filterUp={'1user_name'} isArrowDown={isNameOfCreatorArrowDown} setIsArrowDown={setIsNameOfCreatorArrowDonw}
-                    max={max}
-                    min={min}
-                    page={page}
-                    pageCount={pageCount}
+                    <th>User Name <FilterBtn filterDown={'0user_name'} filterUp={'1user_name'}
+                                             isArrowDown={isNameOfCreatorArrowDown}
+                                             setIsArrowDown={setIsNameOfCreatorArrowDonw}
+                                             max={max}
+                                             min={min}
+                                             page={page}
+                                             pageCount={pageCount}
                     /></th>
-                    <th>Cards Count <FilterBtn filterDown={'0cardsCount'} filterUp={'1cardsCount'} isArrowDown={isQuantityOfCardsArrowDown} setIsArrowDown={setIsQuantityOfCardsArrowDonw}
-                    max={max}
-                    min={min}
-                    page={page}
-                    pageCount={pageCount}
+                    <th>Cards Count <FilterBtn filterDown={'0cardsCount'} filterUp={'1cardsCount'}
+                                               isArrowDown={isQuantityOfCardsArrowDown}
+                                               setIsArrowDown={setIsQuantityOfCardsArrowDonw}
+                                               max={max}
+                                               min={min}
+                                               page={page}
+                                               pageCount={pageCount}
                     /></th>
                     <th>Rating</th>
                     <th>Shots</th>
@@ -99,9 +117,28 @@ const Packs = (props: CardsPropsType) => {
                 {cardPacksTotalCount > pageCount &&
                 <Paginator totalItemsCount={cardPacksTotalCount} pageSize={pageCount} currentPage={page}
                            portionsSize={10} onChangePage={onChangePage} onChangeCountOnPage={onChangeCountOnPage}/>
-                           }
+                }
 
             </div>
+            <Modal modalActive={showRemoveModal} setModalActive={setShowRemoveModal}>
+                <div className={"container valign-wrapper center-align"}>
+                    <div className={"row"}>
+                        <div className={"col s12"}>
+                            <h5>Do you really want to delete this pack?</h5>
+                        </div>
+                        <div className={"col s6"}>
+                            <button onClick={removeHandler}
+                                    className={"btn waves-effect waves-light"}>Yes
+                            </button>
+                        </div>
+                        <div className={"col s6"}>
+                            <button onClick={() => setShowRemoveModal(false)}
+                                    className={"btn red waves-effect waves-light"}>No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }
