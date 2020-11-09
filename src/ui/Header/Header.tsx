@@ -23,7 +23,6 @@ const Header = () => {
                     <li><NavigationLink to={restorePass} title={"Restore password"}/></li>
                     <li><NavigationLink to={profile} title={"Profile"}/></li>
                     <li><NavigationLink to={packs} title={"Packs"}/></li>
-                    <li><NavigationLink to={card} title={"Card"}/></li>
                     <li><NavigationLink to={resetPass} title={"Reset password"}/></li>
                     <li><NavigationLink to={registration} title={"Registration"}/></li>
                 </ul>
