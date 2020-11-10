@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
 import {updateCardPackTC} from "../../../bll/packs-reducer";
 
-export const EditPack = ({id, name, setUpdateModalActive}: EditCardPackType) => {
+export const EditPack = React.memo(({id, name, setUpdateModalActive}: EditCardPackType) => {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -46,7 +46,7 @@ export const EditPack = ({id, name, setUpdateModalActive}: EditCardPackType) => 
             </div>
         </form>
     )
-}
+})
 
 
 // types

@@ -4,7 +4,7 @@ import { RegistrationStateType } from '../../bll/registration-reducer';
 import { AppRootStateType } from '../../bll/store';
 import Registration from './Registration';
 
-const RegistrationContainer = () => {
+const RegistrationContainer = React.memo(() => {
 
 	const registration = useSelector<AppRootStateType, RegistrationStateType>(state => state.registration);
 	const dispatch = useDispatch();
@@ -12,6 +12,6 @@ const RegistrationContainer = () => {
 	return (
 		<Registration/>
 	)
-}
+})
 
 export default RegistrationContainer;

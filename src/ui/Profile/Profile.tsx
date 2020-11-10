@@ -4,14 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {authMeTC, ProfileStateType} from "../../bll/profile-reducer";
 import {AppRootStateType} from "../../bll/store";
 import {Redirect} from 'react-router-dom';
-import {Loading} from "../Common/Loading/Loading";
 
 type ProfilePropsType = any
 
-const Profile = (props: ProfilePropsType) => {
+const Profile = React.memo((props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const userInfo = useSelector<AppRootStateType, ProfileStateType>(state => state.profile)
-    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const isRequestAuthMe = useSelector<AppRootStateType, boolean>(state => state.app.isRequestAuthMe)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -31,6 +29,6 @@ const Profile = (props: ProfilePropsType) => {
             <div>publicCardPacksCount: {userInfo.publicCardPacksCount}</div>
         </div>
     )
-}
+})
 
 export default Profile;

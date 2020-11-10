@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Redirect, useParams} from 'react-router-dom';
 import {CardType, getCardTC, removeCardTC} from '../../bll/card-reducer';
@@ -11,8 +11,8 @@ import EditCard from './EditCard/EditCard';
 type CardContainerPropsType = any
 let idCard: string = '';
 let cardName: string = '';
-let answer: string = ''
-const CardContainer = (props: CardContainerPropsType) => {
+let cardAnswer: string = ''
+const CardContainer = React.memo((props: CardContainerPropsType) => {
 
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged);
     const card = useSelector<AppRootStateType, Array<CardType>>(state => state.card.cards);
@@ -33,16 +33,16 @@ const CardContainer = (props: CardContainerPropsType) => {
         return <Redirect to={'/login'}/>
     }
 
-    const updateCardName = (id: string, name: string, answer: string) => {
+    const updateCardName = useCallback((id: string, name: string, answer: string) => {
         idCard = id;
         cardName = name;
-        answer = answer;
+        cardAnswer = answer;
         setNewCardNameModal(true);
-    }
+    },[])
 
-    const removeCard = (id: string) => {
+    const removeCard = useCallback((id: string) => {
         dispatch(removeCardTC(id));
-    }
+    },[dispatch])
 
     return (
         <div>
@@ -60,11 +60,11 @@ const CardContainer = (props: CardContainerPropsType) => {
             </Modal>
             <Modal modalActive={newCardNameModal} setModalActive={setNewCardNameModal}>
                 {!!idCard && !!cardName &&
-                <EditCard id={idCard} name={cardName} setNewCardNameModal={setNewCardNameModal} packId={packId} answer={answer}/>}
+                <EditCard id={idCard} name={cardName} setNewCardNameModal={setNewCardNameModal} packId={packId} answer={cardAnswer}/>}
             </Modal>
         </div>
     )
-}
+})
 
 
 export default CardContainer

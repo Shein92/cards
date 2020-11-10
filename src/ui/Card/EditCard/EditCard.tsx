@@ -11,7 +11,7 @@ type EditCardPropsType = {
 	answer: string
 }
 
-const EditCard = (props: EditCardPropsType) => {
+const EditCard = React.memo((props: EditCardPropsType) => {
 
 	const dispatch = useDispatch();
 	const formik = useFormik({
@@ -25,8 +25,6 @@ const EditCard = (props: EditCardPropsType) => {
 			props.setNewCardNameModal(false);
 		}
 	})
-
-	// console.log(formik.values.answer);
 
 	return (
 		<form className="col s12" onSubmit={formik.handleSubmit}>
@@ -64,6 +62,6 @@ const EditCard = (props: EditCardPropsType) => {
 			</div>
 		</form>
 	)
-}
+})
 
 export default EditCard;

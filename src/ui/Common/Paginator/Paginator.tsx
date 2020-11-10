@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from './Paginator.module.css'
 
-export const Paginator = ({totalItemsCount, pageSize, currentPage, portionsSize, onChangePage, onChangeCountOnPage}: PaginatorPropsType) => {
+export const Paginator = React.memo(({totalItemsCount, pageSize, currentPage, portionsSize, onChangePage, onChangeCountOnPage}: PaginatorPropsType) => {
     const [portionNumber, setPortionNumber] = useState(1)
     const pagesCount = Math.ceil(totalItemsCount / pageSize)
     let pages: Array<number> = []
@@ -50,7 +50,7 @@ export const Paginator = ({totalItemsCount, pageSize, currentPage, portionsSize,
         </div>
 
     )
-}
+})
 
 // types
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Module.module.css"
 
-export const Modal = ({modalActive, setModalActive, children}: ModalPropsType) => {
+export const Modal = React.memo(({modalActive, setModalActive, children}: ModalPropsType) => {
     return (
         <div className={modalActive ? `${styles.wrapper} ${styles.active}` : styles.wrapper}
              onClick={() => setModalActive(false)}>
@@ -11,7 +11,7 @@ export const Modal = ({modalActive, setModalActive, children}: ModalPropsType) =
             </div>
         </div>
     )
-}
+})
 
 
 // types

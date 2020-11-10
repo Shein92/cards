@@ -99,10 +99,6 @@ const RestorePassContainer = React.memo(() => {
 			</div>
 		</div>
 	)
-
-	// return (
-	// 	<RestorePass/>
-	// )
 })
 
 export default RestorePassContainer;

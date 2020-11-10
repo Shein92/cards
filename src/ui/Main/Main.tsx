@@ -11,7 +11,7 @@ import {card, packs, login, profile, registration, resetPass, restorePass} from 
 import PacksContainer from "../Packs/PacksContainer";
 import CardContainer from '../Card/CardContainer';
 
-const Main = () => {
+const Main = React.memo(() => {
     return (
         <div>
             <Header/>
@@ -28,6 +28,6 @@ const Main = () => {
             </Switch>
         </div>
     )
-}
+})
 
 export default Main;

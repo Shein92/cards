@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import style from './Button.module.css';
 
 type ButtonPropsType = {
@@ -8,13 +8,13 @@ type ButtonPropsType = {
 	onSubmit?: () => void
 };
 
-const Button = (props: ButtonPropsType) => {
+const Button = React.memo((props: ButtonPropsType) => {
 
-	const onClick = () => {
+	const onClick = useCallback(() => {
 		if (props.onClick) {
 			props.onClick()
 		}
-	}
+	},[props])
 
 	return (
 		<button onClick={onClick}
@@ -23,6 +23,6 @@ const Button = (props: ButtonPropsType) => {
 			type={props.type}
 		>{props.text}</button>
 	)
-}
+})
 
 export default Button;

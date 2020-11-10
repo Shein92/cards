@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import NavigationLink from '../Common/NavigationLink/NavigationLink';
 import { login, packs, profile, registration, resetPass } from '../Routes/routes';
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,13 @@ import { AppRootStateType } from "../../bll/store";
 import { logoutTC } from "../../bll/login-reducer";
 
 
-const Header = () => {
+const Header = React.memo(() => {
 
 	const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
 	const dispatch = useDispatch()
-	const logoutHandler = () => {
+	const logoutHandler = useCallback(() => {
 		dispatch(logoutTC())
-	}
+	},[dispatch])
 
 
 	let content = <div className="nav-wrapper teal lighten-1">
@@ -43,6 +43,6 @@ const Header = () => {
 			{content}
 		</nav>
 	)
-}
+})
 
 export default Header;

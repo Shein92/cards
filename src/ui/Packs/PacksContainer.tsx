@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {Redirect} from 'react-router-dom';
@@ -16,7 +16,7 @@ type ProfilePropsType = any
 let idPack: string
 let namePack: string
 
-const PacksContainer = (props: ProfilePropsType) => {
+const PacksContainer = React.memo((props: ProfilePropsType) => {
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged)
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     const cards = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.cards.cardPacks)
@@ -41,28 +41,27 @@ const PacksContainer = (props: ProfilePropsType) => {
 
 
 
-    const removeCardPack = (id: string) => {
+    const removeCardPack = useCallback((id: string) => {
         dispatch(removeCardPackTC(id))
-    }
+    },[dispatch]);
 
-    const updateHandler = (id: string, name: string) => {
+    const updateHandler = useCallback((id: string, name: string) => {
         idPack = id
         namePack = name
         setUpdateModalActive(true)
-    }
+    },[])
 
-    const myPackChangeHandler = (check: boolean) => {
+    const myPackChangeHandler = useCallback((check: boolean) => {
         setFilterById(check)
-    }
+    },[])
 
-    const onChangeRange = (value: Array<number>) => {
-        setValue(value)
+    const onChangeRange = useCallback((value: Array<number>) => {
+        setValue(value);
+    },[])
 
-    }
-
-    const rangeHandler = () => {
+    const rangeHandler = useCallback(() => {
         dispatch(setMinMaxValueAC(value))
-    }
+    },[dispatch, value])
 
     if (!isLogged) {
         return <Redirect to={'/login'}/>
@@ -70,7 +69,6 @@ const PacksContainer = (props: ProfilePropsType) => {
 
     return (
         <div>
-            {/* {isLoading && <Loading/>} */}
             <div className={styles.cards}>
                 <div className={"col s6"} style={{overflow: "hidden"}}>
                     <h1>Packs</h1>
@@ -146,6 +144,6 @@ const PacksContainer = (props: ProfilePropsType) => {
         </div>
 
     )
-}
+})
 
 export default PacksContainer;

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Loading.module.css"
 
-export const Loading = () => {
+export const Loading = React.memo(() => {
     return (
         <div className={styles.load}>
             <div className={styles.loaderWrapper}>
@@ -19,7 +19,7 @@ export const Loading = () => {
             </div>
         </div>
     )
-}
+})
 // export const Loading = () => {
 //     return (
 //         <div className={styles.loaderWrap}>

@@ -12,7 +12,7 @@ type NewCardPackPropsType = {
     setModalActive: (value: boolean) => void
 }
 
-export const NewPack = ({setModalActive}: NewCardPackPropsType) => {
+export const NewPack = React.memo(({setModalActive}: NewCardPackPropsType) => {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -63,4 +63,4 @@ export const NewPack = ({setModalActive}: NewCardPackPropsType) => {
             </form>
         </div>
     )
-}
+})

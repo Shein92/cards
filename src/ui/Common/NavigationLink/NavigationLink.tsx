@@ -6,12 +6,12 @@ type NavigationLinkPropsType = {
 	title: string
 }
 
-const NavigationLink = (props: NavigationLinkPropsType) => {
+const NavigationLink = React.memo((props: NavigationLinkPropsType) => {
 	return (
 		<div>
 			<NavLink to={props.to}>{props.title}</NavLink>
 		</div>
 	)
-}
+})
 
 export default NavigationLink;

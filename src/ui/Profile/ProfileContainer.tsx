@@ -4,7 +4,7 @@ import { restoreSendAC } from '../../bll/restorePas-reducer';
 import { AppRootStateType } from '../../bll/store';
 import Profile from './Profile';
 
-const ProfileContainer = () => {
+const ProfileContainer = React.memo(() => {
 
 	const isRestored = useSelector<AppRootStateType, boolean>(ans => ans.restorePassword.isRestored); 
 	const dispatch = useDispatch();
@@ -14,6 +14,6 @@ const ProfileContainer = () => {
 	return (
 		<Profile />
 	)
-}
+})
 
 export default ProfileContainer;

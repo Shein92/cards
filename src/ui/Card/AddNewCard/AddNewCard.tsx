@@ -8,7 +8,7 @@ type AddNewCardPropsType = {
 	packId: string
 }
 
-const AddNewCard = (props: AddNewCardPropsType) => {
+const AddNewCard = React.memo((props: AddNewCardPropsType) => {
 
 	const dispatch = useDispatch();
 	const formik = useFormik({
@@ -60,6 +60,6 @@ const AddNewCard = (props: AddNewCardPropsType) => {
 			</form>
 		</div>
 	)
-}
+})
 
 export default AddNewCard;

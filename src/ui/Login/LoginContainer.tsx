@@ -4,7 +4,7 @@ import { LoginStateType } from '../../bll/login-reducer';
 import { AppRootStateType } from '../../bll/store';
 import Login from './Login';
 
-const LoginContainer = () => {
+const LoginContainer = React.memo(() => {
 
 	const login = useSelector<AppRootStateType, LoginStateType>(state => state.login);
 	const dispatch = useDispatch();
@@ -12,6 +12,6 @@ const LoginContainer = () => {
 	return (
 		<Login />
 	)
-}
+})
 
 export default LoginContainer;

@@ -11,10 +11,9 @@ import {Loading} from "../Common/Loading/Loading";
 
 type RegistrationPropsType = any
 
-const Registration = (props: RegistrationPropsType) => {
+const Registration = React.memo((props: RegistrationPropsType) => {
 
 	const isRegistred = useSelector<AppRootStateType, boolean>(state => state.registration.isRegistred);
-	const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
 	const dispatch = useDispatch()
 
 	type FormikErrorType = {
@@ -112,6 +111,6 @@ const Registration = (props: RegistrationPropsType) => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default Registration;

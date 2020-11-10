@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { CardType } from '../../bll/card-reducer';
 import { AppRootStateType } from '../../bll/store';
@@ -9,17 +9,17 @@ type CardPropsType = {
 	removeCard: (id: string) => void
 }
 
-const Card = (props: CardPropsType) => {
+const Card = React.memo((props: CardPropsType) => {
 
 	const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
 
-	const updateCardName = (id: string, name: string, answer: string) => {
+	const updateCardName = useCallback((id: string, name: string, answer: string) => {
 		props.updateCardName(id, name, answer);
-	}
+	},[props])
 
-	const removeCard = (id: string) => {
+	const removeCard = useCallback((id: string) => {
 		props.removeCard(id);
-	}
+	},[props])
 
 	const rows = props.card.map(card => {
 		return <tr key={card._id}>
@@ -30,8 +30,7 @@ const Card = (props: CardPropsType) => {
 			<td>
 				<div>
 					<div>
-						<button style={{ marginRight: '5px' }} disabled={userId !== card.user_id} onClick={() => {updateCardName(card._id, card.question, card.answer);
-						console.log(card.answer)}}
+						<button style={{ marginRight: '5px' }} disabled={userId !== card.user_id} onClick={() => updateCardName(card._id, card.question, card.answer)}
 							className="btn waves-effect waves-light" type="submit" name="action">
 							<i className="material-icons">edit</i>
 						</button>
@@ -62,6 +61,6 @@ const Card = (props: CardPropsType) => {
 			</table>
 		</div>
 	)
-}
+})
 
 export default Card;

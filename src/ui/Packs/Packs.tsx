@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
 import {NavLink} from 'react-router-dom';
@@ -10,7 +10,7 @@ import {Modal} from "../Common/Modal/Modal";
 
 let PackId: string
 
-const Packs = (props: CardsPropsType) => {
+const Packs = React.memo((props: CardsPropsType) => {
     const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
     const {cardPacksTotalCount, page, pageCount, packName, min, max, sortPacks} = useSelector<AppRootStateType, CardResponseType>(state => state.cards)
     const dispatch = useDispatch()
@@ -23,31 +23,32 @@ const Packs = (props: CardsPropsType) => {
         if (props.filterById)
             dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount, userId))
         else dispatch(getCardsTC(packName, min, max, sortPacks, page, pageCount))
-    }, [page, pageCount, packName, min, max, sortPacks, props.filterById, dispatch])
-    const removeHandlerModal = (id: string) => {
+    }, [page, pageCount, packName, min, max, sortPacks, props.filterById, dispatch]);
+
+    const removeHandlerModal = useCallback((id: string) => {
         setShowRemoveModal(true)
         PackId = id
-    }
+    },[])
 
-    const removeHandler = () => {
+    const removeHandler = useCallback(() => {
         if (PackId) {
             props.removeCardPack(PackId)
             setShowRemoveModal(false)
             PackId = ''
         }
-    }
+    },[props])
 
-    const updateHandler = (id: string, name: string) => {
+    const updateHandler = useCallback((id: string, name: string) => {
         props.updateHandler(id, name)
-    }
+    },[props])
 
-    const onChangePage = (currentPage: number) => {
+    const onChangePage = useCallback((currentPage: number) => {
         dispatch(setCurrentPageAC(currentPage))
-    }
+    },[dispatch])
 
-    const onChangeCountOnPage = (count: number) => {
+    const onChangeCountOnPage = useCallback((count: number) => {
         dispatch(setCountOnPageAC(count))
-    }
+    },[dispatch])
 
     const rows = props.cards.map((card) =>
         <tr key={card._id}>
@@ -141,7 +142,7 @@ const Packs = (props: CardsPropsType) => {
             </Modal>
         </div>
     )
-}
+})
 
 export default Packs;
 

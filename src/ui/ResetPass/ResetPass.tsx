@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Button from '../Common/Button/Button';
 import Input from '../Common/Input/Input';
 import {useDispatch} from "react-redux";
@@ -11,7 +11,7 @@ type ResetPassPropsType = {
     answer: string
 }
 
-const ResetPass = (props: ResetPassPropsType) => {
+const ResetPass = React.memo((props: ResetPassPropsType) => {
 
     const dispatch = useDispatch();
 
@@ -19,13 +19,13 @@ const ResetPass = (props: ResetPassPropsType) => {
 		dispatch(authMeTC())
 	}, [])
 
-    const onChange = (value: string) => {
+    const onChange = useCallback((value: string) => {
         props.onChange(value);
-    }
+    },[props])
 
-    const onClick = () => {
+    const onClick = useCallback(() => {
         props.onResetPassBtnClick()
-    }
+    },[props])
 
     return (
         <div>
@@ -41,6 +41,6 @@ const ResetPass = (props: ResetPassPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 export default ResetPass;

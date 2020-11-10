@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import style from './PageNotFound.module.css';
 
-const PageNotFound = () => {
+const PageNotFound = React.memo(() => {
 
 	if (<Route exact path={'/'} />) {
 		return <Redirect to={'/login'} />
@@ -20,6 +20,6 @@ const PageNotFound = () => {
 			</h2>
 		</div>
 	)
-}
+})
 
 export default PageNotFound;
