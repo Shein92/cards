@@ -11,10 +11,10 @@ import EditCard from './EditCard/EditCard';
 type CardContainerPropsType = any
 let idCard: string = '';
 let cardName: string = '';
+let answer: string = ''
 const CardContainer = (props: CardContainerPropsType) => {
 
     const isLogged = useSelector<AppRootStateType, boolean>(state => state.app.isLogged);
-    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
     const card = useSelector<AppRootStateType, Array<CardType>>(state => state.card.cards);
     const [addNewCardModal, setAddNewCardModal] = useState(false);
     const [newCardNameModal, setNewCardNameModal] = useState(false);
@@ -23,7 +23,6 @@ const CardContainer = (props: CardContainerPropsType) => {
 
     useEffect(() => {
         dispatch(getCardTC(packId));
-        // alert(packId);
     }, [])
 
     if (!packId) {
@@ -34,9 +33,10 @@ const CardContainer = (props: CardContainerPropsType) => {
         return <Redirect to={'/login'}/>
     }
 
-    const updateCardName = (id: string, name: string) => {
+    const updateCardName = (id: string, name: string, answer: string) => {
         idCard = id;
         cardName = name;
+        answer = answer;
         setNewCardNameModal(true);
     }
 
@@ -44,24 +44,8 @@ const CardContainer = (props: CardContainerPropsType) => {
         dispatch(removeCardTC(id));
     }
 
-    // const card = [{
-    // 	answer: 'henlo',
-    // question: 'string',
-    // cardsPack_id: 'string',
-    // grade: 1,
-    // rating: 2,
-    // shots: 1,
-    // type: 'card',
-    // user_id: '123123lknkjgf',
-    // created: 'lksdmfdslf',
-    // updated: 'string',
-    // __v: 1342412351231,
-    // _id: 'dkfgkldnfgkjndsmds123j8',
-    // }]
-
     return (
         <div>
-            {/* {isLoading && <Loading />} */}
             <div>
                 <h1>Card</h1>
                 <button onClick={() => setAddNewCardModal(true)}
@@ -76,7 +60,7 @@ const CardContainer = (props: CardContainerPropsType) => {
             </Modal>
             <Modal modalActive={newCardNameModal} setModalActive={setNewCardNameModal}>
                 {!!idCard && !!cardName &&
-                <EditCard id={idCard} name={cardName} setNewCardNameModal={setNewCardNameModal} packId={packId}/>}
+                <EditCard id={idCard} name={cardName} setNewCardNameModal={setNewCardNameModal} packId={packId} answer={answer}/>}
             </Modal>
         </div>
     )

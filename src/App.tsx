@@ -8,10 +8,10 @@ import Main from './ui/Main/Main';
 
 const App = () => {
 	const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
+	
 	return (
 		<div className="App">
 			{isLoading && <Loading />}
-			{/* hashRouter, provider */}
 			<HashRouter>
 				<Main/>
 			</HashRouter>
@@ -20,6 +20,5 @@ const App = () => {
 }
 
 
-//{/* <Header/> */}
 
 export default App;

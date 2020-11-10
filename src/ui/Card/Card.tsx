@@ -5,7 +5,7 @@ import { AppRootStateType } from '../../bll/store';
 
 type CardPropsType = {
 	card: Array<CardType>,
-	updateCardName: (id: string, name: string) => void,
+	updateCardName: (id: string, name: string, answer: string) => void,
 	removeCard: (id: string) => void
 }
 
@@ -13,8 +13,8 @@ const Card = (props: CardPropsType) => {
 
 	const userId = useSelector<AppRootStateType, string>(state => state.profile._id)
 
-	const updateCardName = (id: string, name: string) => {
-		props.updateCardName(id, name);
+	const updateCardName = (id: string, name: string, answer: string) => {
+		props.updateCardName(id, name, answer);
 	}
 
 	const removeCard = (id: string) => {
@@ -30,7 +30,8 @@ const Card = (props: CardPropsType) => {
 			<td>
 				<div>
 					<div>
-						<button style={{ marginRight: '5px' }} disabled={userId !== card.user_id} onClick={() => updateCardName(card._id, card.question)}
+						<button style={{ marginRight: '5px' }} disabled={userId !== card.user_id} onClick={() => {updateCardName(card._id, card.question, card.answer);
+						console.log(card.answer)}}
 							className="btn waves-effect waves-light" type="submit" name="action">
 							<i className="material-icons">edit</i>
 						</button>

@@ -21,11 +21,12 @@ export const getCardAPI = {
 	removeCard(cardId: string) {
 		return instance.delete(`cards/card?id=${cardId}`)
 	},
-	updateCard(cardId: string, question?: string, comments?: string) {
+	updateCard(cardId: string, question?: string, answer?: string) {
+		console.log(answer);
 		return instance.put('cards/card', {card: {
 			_id: cardId,
 			question: question,
-			comments: comments
+			comments: answer
 		}})
 	}
 }

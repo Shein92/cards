@@ -25,8 +25,6 @@ const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={style.profile}>
-            {/* {isLoading && <Loading/>} */}
-            {/*<h2>Profile Page</h2>*/}
             <div>Email: {userInfo.email}</div>
             <div>Name: {userInfo.name}</div>
             <div>Created: {userInfo.created}</div>

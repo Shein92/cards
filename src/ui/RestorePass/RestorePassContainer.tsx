@@ -8,13 +8,11 @@ import { profile } from '../Routes/routes';
 import style from './RestorePass.module.css';
 import inputStyle from '../Common/Input/Input.module.css';
 import btn from '../Common/Button/Button.module.css';
-import {Loading} from "../Common/Loading/Loading";
 
 const RestorePassContainer = React.memo(() => {
 
 	let answer = useSelector<AppRootStateType, string>(ans => ans.restorePassword.answer);
 	const isRestored = useSelector<AppRootStateType, boolean>(ans => ans.restorePassword.isRestored);
-	const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
 	const dispatch = useDispatch();
 	let { token } = useParams();
 
@@ -58,7 +56,6 @@ const RestorePassContainer = React.memo(() => {
 
 	return (
 		<div className={style.restorePass} style={{ textAlign: 'center' }}>
-			{/* { isLoading && <Loading />} */}
 			<form onSubmit={formik.handleSubmit}>
 				<div>
 					<div>
